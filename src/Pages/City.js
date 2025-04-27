@@ -1,7 +1,282 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
  
-// Modal Component for the Form
+// View Modal Component
+const CityViewModal = ({ isOpen, onClose, cityData }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState({...cityData});
+  
+  if (!isOpen) return null;
+  
+  const handleEditToggle = () => {
+    setIsEditing(!isEditing);
+    // Reset to original data if canceling edit
+    if (isEditing) {
+      setEditData({...cityData});
+    }
+  };
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEditData(prev => ({...prev, [name]: value}));
+  };
+  
+  const handleSave = () => {
+    // Here you would typically save the changes
+    // For now, just exit edit mode
+    setIsEditing(false);
+  };
+  
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content view-modal">
+        <div className="modal-header">
+          <h2 className="modal-title">{isEditing ? "Edit" : "View"}</h2>
+          <button className="close-button" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="view-form">
+          <div className="view-row">
+            <div className="view-group">
+              <label>City ID</label>
+              <input 
+                type="text" 
+                name="cityId"
+                value={editData.cityCode || '01'} 
+                readOnly 
+              />
+            </div>
+            <div className="view-group">
+              <label>City Code</label>
+              <input 
+                type="text" 
+                name="cityCode"
+                value={editData.cityCode || '01'} 
+                onChange={handleChange}
+                readOnly={!isEditing} 
+              />
+            </div>
+            <div className="view-group">
+              <label>City Name</label>
+              <input 
+                type="text" 
+                name="city"
+                placeholder="Enter Value" 
+                value={editData.city || ''} 
+                onChange={handleChange}
+                readOnly={!isEditing} 
+              />
+            </div>
+          </div>
+          
+          <div className="view-row">
+            <div className="view-group">
+              <label>Status</label>
+              <input 
+                type="text" 
+                name="status"
+                value={editData.status || '01'} 
+                onChange={handleChange}
+                readOnly={!isEditing} 
+              />
+            </div>
+            <div className="view-group">
+              <label>District ID</label>
+              <input 
+                type="text" 
+                name="district"
+                value={editData.district || '01'} 
+                onChange={handleChange}
+                readOnly={!isEditing} 
+              />
+            </div>
+            <div className="view-group">
+              <label>Zone ID</label>
+              <input 
+                type="text" 
+                name="zone"
+                placeholder="Enter Value" 
+                value={editData.zone || ''} 
+                onChange={handleChange}
+                readOnly={!isEditing} 
+              />
+            </div>
+          </div>
+          
+          <div className="view-row">
+            <div className="view-group">
+              <label>Payroll City Code</label>
+              <input 
+                type="text" 
+                name="payrollCityCode"
+                placeholder="Enter Value" 
+                value={editData.payrollCityCode || ''} 
+                onChange={handleChange}
+                readOnly={!isEditing} 
+              />
+            </div>
+            <div className="view-group">
+              <label>Sync Status</label>
+              <input 
+                type="text" 
+                name="syncStatus"
+                value={editData.status || '01'} 
+                onChange={handleChange}
+                readOnly={!isEditing} 
+              />
+            </div>
+            <div className="view-group">
+              <label>Sync Date</label>
+              <input 
+                type="text" 
+                name="syncDate"
+                value={editData.syncDate || '01'} 
+                onChange={handleChange}
+                readOnly={!isEditing} 
+              />
+            </div>
+          </div>
+          
+          <div className="view-actions">
+            {isEditing ? (
+              <>
+                <button type="button" className="cancel-button" onClick={handleEditToggle}>Cancel</button>
+                <button type="button" className="save-button" onClick={handleSave}>Save</button>
+              </>
+            ) : (
+              <>
+                <button type="button" className="delete-button">Delete</button>
+                <button type="button" className="edit-button" onClick={handleEditToggle}>Edit</button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+      <style>{`
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: black;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+        
+        .modal-content.view-modal {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          width: 650px;
+          max-width: 95%;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+        
+        .modal-title {
+          font-size: 20px;
+          font-weight: 600;
+          margin: 0;
+        }
+        
+        .close-button {
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          color: #333;
+          padding: 0;
+          line-height: 1;
+        }
+        
+        .view-form {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+        
+        .view-row {
+          display: flex;
+          gap: 16px;
+          width: 100%;
+        }
+        
+        .view-group {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        
+        .view-group label {
+          font-size: 14px;
+          font-weight: 500;
+          color: #444;
+        }
+        
+        .view-group input {
+          padding: 8px 12px;
+          border: 1px solid #e0e0e0;
+          border-radius: 4px;
+          background-color: #fff;
+          font-size: 14px;
+        }
+        
+        .view-group input:not([readonly]) {
+          border-color: #4951f5;
+          background-color: #f8f9ff;
+        }
+        
+        .view-actions {
+          display: flex;
+          gap: 8px;
+          justify-content: flex-end;
+          margin-top: 24px;
+        }
+        
+        .delete-button {
+          padding: 8px 24px;
+          border-radius: 4px;
+          background-color: white;
+          color: #ff4d4f;
+          border: 1px solid #ff4d4f;
+          cursor: pointer;
+          font-weight: 500;
+        }
+        
+        .edit-button, .save-button {
+          padding: 8px 32px;
+          border-radius: 4px;
+          background-color: #4951f5;
+          color: white;
+          border: none;
+          cursor: pointer;
+          font-weight: 500;
+        }
+        
+        .cancel-button {
+          padding: 8px 24px;
+          border-radius: 4px;
+          background-color: #f0f0f0;
+          color: #444;
+          border: none;
+          cursor: pointer;
+          font-weight: 500;
+        }
+      `}</style>
+    </div>
+  );
+};
+
 const CityFormModal = ({ isOpen, onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
     cityCode: '',
@@ -11,6 +286,7 @@ const CityFormModal = ({ isOpen, onClose, onSubmit }) => {
     zone: '',
     payrollCityCode: '',
     status: '',
+    
   });
  
   const handleChange = (e) => {
@@ -33,6 +309,7 @@ const CityFormModal = ({ isOpen, onClose, onSubmit }) => {
       zone: '',
       payrollCityCode: '',
       status: '',
+      
     });
   };
  
@@ -157,7 +434,7 @@ const CityFormModal = ({ isOpen, onClose, onSubmit }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
+          background-color: black;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -243,16 +520,22 @@ const CityFormModal = ({ isOpen, onClose, onSubmit }) => {
   );
 };
  
-
 const CityManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [selectedCity, setSelectedCity] = useState(null);
   const [cities, setCities] = useState([
-    { cityCode: '01', city: 'Guntur', state: 'Andhra Pradesh', district: 'Guntur', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: 'Updated' },
-    
+    { cityCode: '01', city: 'Guntur', state: 'Andhra Pradesh', district: 'Guntur', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '01' },
+    { cityCode: '02', city: 'Hyderabd', state: 'Telangana', district: 'Hyderabad', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '02' },
   ]);
  
   const handleAddCity = (newCity) => {
     setCities((prev) => [...prev, { ...newCity, syncDate: 'Updated' }]);
+  };
+  
+  const handleViewCity = (city) => {
+    setSelectedCity(city);
+    setIsViewModalOpen(true);
   };
  
   return (
@@ -302,7 +585,12 @@ const CityManagementPage = () => {
                 <div className="table-actions">
                   <span className="table-action">🗑️</span>
                   <span className="table-action">✏️</span>
-                  <span className="table-action">👁️ View</span>
+                  <span 
+                    className="table-action view-action"
+                    onClick={() => handleViewCity(row)}
+                  >
+                    👁️ View
+                  </span>
                 </div>
               </td>
             </tr>
@@ -327,6 +615,12 @@ const CityManagementPage = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSubmit={handleAddCity}
+      />
+      
+      <CityViewModal
+        isOpen={isViewModalOpen}
+        onClose={() => setIsViewModalOpen(false)}
+        cityData={selectedCity || {}}
       />
  
       <style>{`
@@ -397,6 +691,10 @@ const CityManagementPage = () => {
         .table-action {
           cursor: pointer;
           color: #666;
+        }
+        
+        .view-action {
+          color: #007bff;
         }
  
         .pagination {

@@ -5,6 +5,7 @@ import image from "../src/assets/image.png";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import City from './Pages/City';
+import State from './Pages/State';
 import Bodysection from './Bodysection';
 import { PiStudentBold } from "react-icons/pi";
 import { FaNewspaper } from "react-icons/fa6";
@@ -18,9 +19,11 @@ import { LuCctv } from "react-icons/lu";
 import { IoIosMan } from "react-icons/io";
 import { FaPersonMilitaryRifle } from "react-icons/fa6";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
-
+import { faSearch,faBell  } from '@fortawesome/free-solid-svg-icons';
+import Campus from './Pages/Campus';
+import Feepaymentyear from './Pages/Feepaymentyear';
+import Applications from './NavbarPages/Applications';
+import Employee from './NavbarPages/Employee';
 
 
 
@@ -37,7 +40,24 @@ function App() {
             <section className='bodycolor'>
               <Routes>
                 <Route path="/students" element={<Bodysection />} />
+                <Route path="/application" element={<Applications />} />
+                <Route path="/employee" element={<Employee/>} />
+
+
+
+
+
+
+                <Route path="/state" element={<State/>}/>
+                <Route path="/campus" element={<Campus/>}/>
+                <Route path="/feepaymentyear" element={<Feepaymentyear/>}/>
                 <Route path="/city" element={<City />} />
+
+                
+
+                
+              
+               
               </Routes>
             </section>
           </div>
@@ -51,17 +71,38 @@ function App() {
 
 function Header() {
   return (
-    <header>
-  <div>
-    <img src={image} alt="Logo" />
-  </div>
-  <div className="search-container">
-      <FontAwesomeIcon icon={faSearch} className="search-icon" />
-      <input type="text" placeholder="Ask for anything" className="search-input" />
-  </div>
+    <header className="header-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', height: '77px', backgroundColor: 'white' }}>
       
-</header>
+      {/* Logo */}
+      <div>
+        <img src={image} alt="Logo" style={{ height: '50px' }} />
+      </div>
 
+      {/* Search Bar */}
+      <div className="search-container" style={{ flexGrow: 1, marginLeft: '20px', marginRight: '20px', position: 'relative' }}>
+        <FontAwesomeIcon icon={faSearch} className="search-icon" style={{ position: 'absolute', top: '30%', left: '100px', transform: 'translateY(-50%)', color: '#aaa' }} />
+        <input 
+          type="text" 
+          placeholder="Ask for anything" 
+          className="search-input" 
+          style={{ width: '50%', padding: '10px 10px 10px 40px', borderRadius: '20px', border: '1px solid #ddd' }}
+        />
+      </div>
+
+      {/* Bell Icon */}
+      <div className="icons-container" style={{ display: 'flex', alignItems: 'center', gap: '0px',marginRight:'10px' }}>
+        <FontAwesomeIcon icon={faBell} style={{ fontSize: '20px', cursor: 'pointer', color: '#555' }} />
+        
+        {/* Profile Section */}
+        {/* <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}> */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start',padding:'60px' }}>
+        <div style={{ fontWeight: 'normal', color: 'black' }}>HYD 256789</div> 
+
+          <div style={{ fontSize: '12px', color: '#333' }}>Cashier</div>
+          {/* <img src="https://via.placeholder.com/40" alt="Profile" style={{ borderRadius: '50%', width: '40px', height: '40px' }} /> */}
+        </div>
+      </div>
+    </header>
   );
 }
 
@@ -71,8 +112,12 @@ function SideMenu() {
   const handleMenuClick = (e) => {
     if (e.key === "students") {
       navigate("/students");
+    }else if (e.key === "application") {
+      navigate("/application");
+    }else if (e.key === "employee") {
+      navigate("/employee");
     }
-    // You can add more routes here if needed
+    
   };
 
   const menuItems = [

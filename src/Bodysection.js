@@ -12,6 +12,8 @@ import { FaBookOpen } from "react-icons/fa";
 import { MdSchool } from "react-icons/md";
 import { FaChalkboardTeacher } from "react-icons/fa";
 
+
+
 function Bodysection() {
   const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ function Bodysection() {
     { label: "State", key: "state", icon: <IoLocationOutline /> },
     { label: "City", key: "city", icon: <MdLocationCity /> },
     { label: "Campus", key: "campus", icon: <FaUniversity /> },
-    { label: "Fee Payment Year", key: "fee-year", icon: <FaCalendarAlt /> },
+    { label: "Fee Payment Year", key: "feeyear", icon: <FaCalendarAlt /> },
     { label: "Fee Heads", key: "fee-heads", icon: <MdPayment /> },
     { label: "Organization", key: "organization", icon: <FaBuilding /> },
     { label: "Card Type", key: "card-type", icon: <MdCreditCard /> },
@@ -32,6 +34,12 @@ function Bodysection() {
   const handleClick = (item) => {
     if (item.key === "city") {
       navigate("/city");
+    }else if(item.key==="state"){
+       navigate("/state")
+    }else if(item.key==="campus"){
+      navigate ("/campus")
+    }else if(item.key==="feeyear"){
+      navigate ("/feepaymentyear")
     }
    
   };
@@ -45,7 +53,6 @@ function Bodysection() {
           View personalized profiles tailored to your campus.
         </p>
         <div className="search-wrapper">
-        
           <input type="text" className="bodyinput" placeholder="Search for the module" />
         </div>
       </div>
