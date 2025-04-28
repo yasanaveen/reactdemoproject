@@ -201,7 +201,11 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
         .view-form {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 32px;
+          top:214px;
+          left:360px;
+          padding: 24px;
+          radius: 12px;
         }
         
         .view-row {
@@ -554,49 +558,51 @@ const CityManagementPage = () => {
         </div>
       </div>
  
-      <table className="table-container">
-        <thead>
-          <tr>
-            <th>City Code</th>
-            <th>City</th>
-            <th>State</th>
-            <th>District</th>
-            <th>Zone</th>
-            <th>Payroll City Code</th>
-            <th>Status</th>
-            <th>Sync Status</th>
-            <th>Sync Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {cities.map((row, index) => (
-            <tr key={index}>
-              <td>{row.cityCode}</td>
-              <td>{row.city}</td>
-              <td>{row.state}</td>
-              <td>{row.district}</td>
-              <td>{row.zone}</td>
-              <td>{row.payrollCityCode}</td>
-              <td>{row.status}</td>
-              <td>{row.status}</td>
-              <td>{row.syncDate}</td>
-              <td>
-                <div className="table-actions">
-                  <span className="table-action">🗑️</span>
-                  <span className="table-action">✏️</span>
-                  <span 
-                    className="table-action view-action"
-                    onClick={() => handleViewCity(row)}
-                  >
-                    👁️ View
-                  </span>
-                </div>
-              </td>
+      <div className="table-responsive">
+        <table className="table-container">
+          <thead>
+            <tr>
+              <th>City Code</th>
+              <th>City</th>
+              <th>State</th>
+              <th>District</th>
+              <th>Zone</th>
+              <th>Payroll City Code</th>
+              <th>Status</th>
+              <th>Sync Status</th>
+              <th>Sync Date</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {cities.map((row, index) => (
+              <tr key={index}>
+                <td>{row.cityCode}</td>
+                <td>{row.city}</td>
+                <td>{row.state}</td>
+                <td>{row.district}</td>
+                <td>{row.zone}</td>
+                <td>{row.payrollCityCode}</td>
+                <td>{row.status}</td>
+                <td>{row.status}</td>
+                <td>{row.syncDate}</td>
+                <td>
+                  <div className="table-actions">
+                    <span className="table-action">🗑️</span>
+                    <span className="table-action">✏️</span>
+                    <span 
+                      className="table-action view-action"
+                      onClick={() => handleViewCity(row)}
+                    >
+                      👁️ View
+                    </span>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
  
       <div className="pagination">
         <button className="pagination-button">Previous</button>
@@ -665,10 +671,21 @@ const CityManagementPage = () => {
           color: #fff;
           border-color: #007bff;
         }
+        
+        /* Add table responsive container */
+        .table-responsive {
+          width: 100%;
+          overflow-x: auto;
+          margin-bottom: 16px;
+          -webkit-overflow-scrolling: touch;
+        }
  
         .table-container {
           width: 100%;
           border-collapse: collapse;
+          min-width: 800px; /* Ensures table doesn't shrink too much */
+            
+          
         }
  
         .table-container th,
@@ -676,11 +693,17 @@ const CityManagementPage = () => {
           padding: 12px;
           text-align: left;
           border-bottom: 1px solid #e2e8f0;
+          white-space: nowrap; /* Prevents text wrapping in cells */
+          
         }
  
         .table-container th {
           background-color: #f8f9fa;
           font-weight: 600;
+          position: sticky;
+          top: 0;
+          z-index: 10;
+          
         }
  
         .table-actions {
@@ -702,6 +725,7 @@ const CityManagementPage = () => {
           justify-content: center;
           gap: 8px;
           margin-top: 16px;
+          flex-wrap: wrap; /* Allow pagination to wrap on smaller screens */
         }
  
         .pagination-button {
@@ -717,6 +741,25 @@ const CityManagementPage = () => {
           background-color: #007bff;
           color: #fff;
           border-color: #007bff;
+        }
+        
+        /* Responsive adjustments */
+        @media screen and (max-width: 768px) {
+          .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+          }
+          
+          .page-actions {
+            width: 100%;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+          }
+          
+          .pagination {
+            padding: 8px 0;
+          }
         }
       `}</style>
     </div>

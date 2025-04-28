@@ -24,6 +24,7 @@ import Campus from './Pages/Campus';
 import Feepaymentyear from './Pages/Feepaymentyear';
 import Applications from './NavbarPages/Applications';
 import Employee from './NavbarPages/Employee';
+import Fleet from './NavbarPages/Fleet';
 
 
 
@@ -42,6 +43,7 @@ function App() {
                 <Route path="/students" element={<Bodysection />} />
                 <Route path="/application" element={<Applications />} />
                 <Route path="/employee" element={<Employee/>} />
+                <Route path="/fleet" element={<Fleet />} />
 
 
 
@@ -80,7 +82,7 @@ function Header() {
 
       {/* Search Bar */}
       <div className="search-container" style={{ flexGrow: 1, marginLeft: '20px', marginRight: '20px', position: 'relative' }}>
-        <FontAwesomeIcon icon={faSearch} className="search-icon" style={{ position: 'absolute', top: '30%', left: '100px', transform: 'translateY(-50%)', color: '#aaa' }} />
+        <FontAwesomeIcon icon={faSearch} className="search-icon" style={{ position: 'absolute', top: '35%', left: '100px', transform: 'translateY(-50%)', color: '#aaa' }} />
         <input 
           type="text" 
           placeholder="Ask for anything" 
@@ -116,11 +118,14 @@ function SideMenu() {
       navigate("/application");
     }else if (e.key === "employee") {
       navigate("/employee");
+    }else if (e.key === "fleet") {
+      navigate("/fleet");
     }
     
   };
 
   const menuItems = [
+    
     { label: "Students", key: "students", icon: <PiStudentBold /> },
     { label: "Application", key: "application", icon: <FaNewspaper /> },
     { label: "Employee", key: "employee", icon: <RiEmpathizeFill /> },

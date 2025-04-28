@@ -8,6 +8,7 @@
   display: flex;
   flex: 1;
   
+
 }
 
 .body-container{
@@ -118,6 +119,7 @@ img{
   display: flex;
   flex-direction: row;
   gap: 250px;
+  
 }
 
 .bodycontainer .left-section{
@@ -138,8 +140,9 @@ img{
   max-width:517px;
   top: 48px;
 }
+   
 
-
+   
 
 
 
