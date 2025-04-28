@@ -147,7 +147,7 @@ function Header() {
       
       <div style={{ display: "flex", flexDirection: "row", padding: "25px" }}>
         <div className="modules-header p-4 text-center font-medium text-indigo-700 bg-indigo-50">
-        <span className="ml-4">Modules</span>
+        
       </div>
         <Menu mode="vertical" items={menuItems} onClick={handleMenuClick} />
       </div>
