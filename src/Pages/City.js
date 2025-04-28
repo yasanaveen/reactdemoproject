@@ -77,7 +77,7 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
                 name="status"
                 value={editData.status || '01'} 
                 onChange={handleChange}
-                readOnly={!isEditing} 
+                readOnly={!isEditing}
               />
             </div>
             <div className="view-group">
@@ -290,7 +290,6 @@ const CityFormModal = ({ isOpen, onClose, onSubmit }) => {
     zone: '',
     payrollCityCode: '',
     status: '',
-    
   });
  
   const handleChange = (e) => {
@@ -313,7 +312,6 @@ const CityFormModal = ({ isOpen, onClose, onSubmit }) => {
       zone: '',
       payrollCityCode: '',
       status: '',
-      
     });
   };
  
@@ -528,6 +526,8 @@ const CityManagementPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedCities, setSelectedCities] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
   const [cities, setCities] = useState([
     { cityCode: '01', city: 'Guntur', state: 'Andhra Pradesh', district: 'Guntur', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '01' },
     { cityCode: '02', city: 'Hyderabd', state: 'Telangana', district: 'Hyderabad', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '02' },
@@ -540,6 +540,23 @@ const CityManagementPage = () => {
   const handleViewCity = (city) => {
     setSelectedCity(city);
     setIsViewModalOpen(true);
+  };
+  
+  const handleCheckboxChange = (cityCode) => {
+    if (selectedCities.includes(cityCode)) {
+      setSelectedCities(selectedCities.filter(code => code !== cityCode));
+    } else {
+      setSelectedCities([...selectedCities, cityCode]);
+    }
+  };
+  
+  const handleSelectAllChange = () => {
+    if (selectAll) {
+      setSelectedCities([]);
+    } else {
+      setSelectedCities(cities.map(city => city.cityCode));
+    }
+    setSelectAll(!selectAll);
   };
  
   return (
@@ -557,11 +574,26 @@ const CityManagementPage = () => {
           </button>
         </div>
       </div>
+      
+      {selectedCities.length > 0 && (
+        <div className="bulk-actions">
+          <span>{selectedCities.length} items selected</span>
+          <button className="action-button">Delete Selected</button>
+        </div>
+      )}
  
       <div className="table-responsive">
         <table className="table-container">
           <thead>
             <tr>
+              <th>
+                <input 
+                  type="checkbox" 
+                  checked={selectAll} 
+                  onChange={handleSelectAllChange}
+                  className="checkbox"
+                />
+              </th>
               <th>City Code</th>
               <th>City</th>
               <th>State</th>
@@ -577,6 +609,14 @@ const CityManagementPage = () => {
           <tbody>
             {cities.map((row, index) => (
               <tr key={index}>
+                <td>
+                  <input 
+                    type="checkbox" 
+                    checked={selectedCities.includes(row.cityCode)} 
+                    onChange={() => handleCheckboxChange(row.cityCode)}
+                    className="checkbox"
+                  />
+                </td>
                 <td>{row.cityCode}</td>
                 <td>{row.city}</td>
                 <td>{row.state}</td>
@@ -672,20 +712,51 @@ const CityManagementPage = () => {
           border-color: #007bff;
         }
         
-        /* Add table responsive container */
+        .bulk-actions {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 8px 16px;
+          background-color: #f9f9f9;
+          border-radius: 8px;
+          margin-bottom: 16px;
+        }
+        
+        .checkbox {
+          width: 16px;
+          height: 16px;
+          cursor: pointer;
+        }
+        
+        /* Improved table responsive container */
         .table-responsive {
           width: 100%;
           overflow-x: auto;
           margin-bottom: 16px;
           -webkit-overflow-scrolling: touch;
+          /* Enhanced scrollbar styles */
+          scrollbar-width: thin;
+          scrollbar-color: #007bff #f0f0f0;
+        }
+        
+        .table-responsive::-webkit-scrollbar {
+          height: 8px;
+        }
+        
+        .table-responsive::-webkit-scrollbar-track {
+          background: #f0f0f0;
+          border-radius: 4px;
+        }
+        
+        .table-responsive::-webkit-scrollbar-thumb {
+          background-color: #007bff;
+          border-radius: 4px;
         }
  
         .table-container {
           width: 100%;
           border-collapse: collapse;
-          min-width: 800px; /* Ensures table doesn't shrink too much */
-            
-          
+          min-width: 1200px; /* Ensures table doesn't shrink too much */
         }
  
         .table-container th,
@@ -694,7 +765,6 @@ const CityManagementPage = () => {
           text-align: left;
           border-bottom: 1px solid #e2e8f0;
           white-space: nowrap; /* Prevents text wrapping in cells */
-          
         }
  
         .table-container th {
@@ -703,7 +773,6 @@ const CityManagementPage = () => {
           position: sticky;
           top: 0;
           z-index: 10;
-          
         }
  
         .table-actions {

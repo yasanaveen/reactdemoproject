@@ -40,6 +40,8 @@ function App() {
           <div className='body-container'>
             <section className='bodycolor'>
               <Routes>
+
+                    {/* this is Navbar routes */}
                 <Route path="/students" element={<Bodysection />} />
                 <Route path="/application" element={<Applications />} />
                 <Route path="/employee" element={<Employee/>} />
@@ -49,7 +51,7 @@ function App() {
 
 
 
-
+                {/* this is the body routes */}
                 <Route path="/state" element={<State/>}/>
                 <Route path="/campus" element={<Campus/>}/>
                 <Route path="/feepaymentyear" element={<Feepaymentyear/>}/>
@@ -85,7 +87,7 @@ function Header() {
         <FontAwesomeIcon icon={faSearch} className="search-icon" style={{ position: 'absolute', top: '35%', left: '100px', transform: 'translateY(-50%)', color: '#aaa' }} />
         <input 
           type="text" 
-          placeholder="Ask for anything" 
+          placeholder="Ask for anything"
           className="search-input" 
           style={{ width: '50%', padding: '10px 10px 10px 40px', borderRadius: '20px', border: '1px solid #ddd' }}
         />
@@ -98,7 +100,7 @@ function Header() {
         {/* Profile Section */}
         {/* <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}> */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start',padding:'60px' }}>
-        <div style={{ fontWeight: 'normal', color: 'black' }}>HYD 256789</div> 
+        <div style={{ fontWeight: 'normal', color: 'black' }}>HYD 256789</div>
 
           <div style={{ fontSize: '12px', color: '#333' }}>Cashier</div>
           {/* <img src="https://via.placeholder.com/40" alt="Profile" style={{ borderRadius: '50%', width: '40px', height: '40px' }} /> */}
@@ -108,42 +110,48 @@ function Header() {
   );
 }
 
-function SideMenu() {
-  const navigate = useNavigate();
+  function SideMenu() {
+    const navigate = useNavigate();
 
-  const handleMenuClick = (e) => {
-    if (e.key === "students") {
-      navigate("/students");
-    }else if (e.key === "application") {
-      navigate("/application");
-    }else if (e.key === "employee") {
-      navigate("/employee");
-    }else if (e.key === "fleet") {
-      navigate("/fleet");
-    }
+    const handleMenuClick = (e) => {
+      if (e.key === "students") {
+        navigate("/students");
+      }else if (e.key === "application") {
+        navigate("/application");
+      }else if (e.key === "employee") {
+        navigate("/employee");
+      }else if (e.key === "fleet") {
+        navigate("/fleet");
+      }
+      
+    };
+
+    const menuItems = [
+
     
-  };
+      
+      { label: "Students", key: "students", icon: <PiStudentBold /> },
+      { label: "Application", key: "application", icon: <FaNewspaper /> },
+      { label: "Employee", key: "employee", icon: <RiEmpathizeFill /> },
+      { label: "Fleet", key: "fleet", icon: <FaPersonMilitaryRifle /> },
+      { label: "Warehouse", key: "warehouse", icon: <MdWarehouse /> },
+      { label: "SMS", key: "sms", icon: <MdOutlineSms /> },
+      { label: "Question Bank", key: "question", icon: <TbMessage2Question /> },
+      { label: "Assets Management", key: "assets", icon: <MdOutlineWebAsset /> },
+      { label: "Payment Services", key: "payment", icon: <MdOutlinePayment /> },
+      { label: "CCTV", key: "cctv", icon: <LuCctv /> },
+      { label: "HRMS", key: "hrms", icon: <IoIosMan /> }
+    ];
 
-  const menuItems = [
-    
-    { label: "Students", key: "students", icon: <PiStudentBold /> },
-    { label: "Application", key: "application", icon: <FaNewspaper /> },
-    { label: "Employee", key: "employee", icon: <RiEmpathizeFill /> },
-    { label: "Fleet", key: "fleet", icon: <FaPersonMilitaryRifle /> },
-    { label: "Warehouse", key: "warehouse", icon: <MdWarehouse /> },
-    { label: "SMS", key: "sms", icon: <MdOutlineSms /> },
-    { label: "Question Bank", key: "question", icon: <TbMessage2Question /> },
-    { label: "Assets Management", key: "assets", icon: <MdOutlineWebAsset /> },
-    { label: "Payment Services", key: "payment", icon: <MdOutlinePayment /> },
-    { label: "CCTV", key: "cctv", icon: <LuCctv /> },
-    { label: "HRMS", key: "hrms", icon: <IoIosMan /> }
-  ];
-
-  return (
-    <div style={{ display: "flex", flexDirection: "row", padding: "25px" }}>
-      <Menu mode="vertical" items={menuItems} onClick={handleMenuClick} />
-    </div>
-  );
-}
+    return (
+      
+      <div style={{ display: "flex", flexDirection: "row", padding: "25px" }}>
+        <div className="modules-header p-4 text-center font-medium text-indigo-700 bg-indigo-50">
+        <span className="ml-4">Modules</span>
+      </div>
+        <Menu mode="vertical" items={menuItems} onClick={handleMenuClick} />
+      </div>
+    );
+  }
 
 export default App;
