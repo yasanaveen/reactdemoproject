@@ -8,4 +8,4 @@ const Feepaymentyear = () => {
   )
 }
 
-export default Feepaymentyear
+export default Feepaymentyear;
