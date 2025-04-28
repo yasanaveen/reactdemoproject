@@ -163,7 +163,7 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
             ) : (
               <>
                 <button type="button" className="delete-button">Cancel</button>
-                <button type="button" className="edit-button" onClick={handleEditToggle}>Add Field</button>
+                <button type="button" className="edit-button" onClick={handleEditToggle}>Edit</button>
               </>
             )}
           </div>
