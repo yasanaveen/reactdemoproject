@@ -159,7 +159,7 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: black;
+          background-color: rgba(0, 0, 0, 0.5);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -436,7 +436,7 @@ const CityFormModal = ({ isOpen, onClose, onSubmit }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: black;
+          background-color: rgba(0, 0, 0, 0.5);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -531,6 +531,17 @@ const CityManagementPage = () => {
   const [cities, setCities] = useState([
     { cityCode: '01', city: 'Guntur', state: 'Andhra Pradesh', district: 'Guntur', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '01' },
     { cityCode: '02', city: 'Hyderabd', state: 'Telangana', district: 'Hyderabad', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '02' },
+    { cityCode: '03', city: 'Bangalore', state: 'Karnataka', district: 'Bangalore', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '03' },
+    { cityCode: '04', city: 'Chennai', state: 'Tamil Nadu', district: 'Chennai', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '04' },
+    { cityCode: '05', city: 'Mumbai', state: 'Maharashtra', district: 'Mumbai', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '05' },
+    { cityCode: '06', city: 'Delhi', state: 'Delhi', district: 'New Delhi', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '06' },
+    { cityCode: '07', city: 'Kolkata', state: 'West Bengal', district: 'Kolkata', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '07' },
+    { cityCode: '08', city: 'Jaipur', state: 'Rajasthan', district: 'Jaipur', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '08' },
+    { cityCode: '09', city: 'Ahmedabad', state: 'Gujarat', district: 'Ahmedabad', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '09' },
+    { cityCode: '10', city: 'Pune', state: 'Maharashtra', district: 'Pune', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '10' },
+    { cityCode: '11', city: 'Kochi', state: 'Kerala', district: 'Kochi', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '11' },
+    { cityCode: '12', city: 'Lucknow', state: 'Uttar Pradesh', district: 'Lucknow', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '12' },
+    { cityCode: '13', city: 'Chandigarh', state: 'Punjab', district: 'Chandigarh', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '13' },
   ]);
  
   const handleAddCity = (newCity) => {
@@ -582,66 +593,69 @@ const CityManagementPage = () => {
         </div>
       )}
  
-      <div className="table-responsive">
-        <table className="table-container">
-          <thead>
-            <tr>
-              <th>
-                <input 
-                  type="checkbox" 
-                  checked={selectAll} 
-                  onChange={handleSelectAllChange}
-                  className="checkbox"
-                />
-              </th>
-              <th>City Code</th>
-              <th>City</th>
-              <th>State</th>
-              <th>District</th>
-              <th>Zone</th>
-              <th>Payroll City Code</th>
-              <th>Status</th>
-              <th>Sync Status</th>
-              <th>Sync Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cities.map((row, index) => (
-              <tr key={index}>
-                <td>
+      {/* Table Container with Fixed Height and Vertical Scrolling */}
+      <div className="table-container-wrapper">
+        <div className="table-responsive">
+          <table className="table-container">
+            <thead>
+              <tr>
+                <th>
                   <input 
                     type="checkbox" 
-                    checked={selectedCities.includes(row.cityCode)} 
-                    onChange={() => handleCheckboxChange(row.cityCode)}
+                    checked={selectAll} 
+                    onChange={handleSelectAllChange}
                     className="checkbox"
                   />
-                </td>
-                <td>{row.cityCode}</td>
-                <td>{row.city}</td>
-                <td>{row.state}</td>
-                <td>{row.district}</td>
-                <td>{row.zone}</td>
-                <td>{row.payrollCityCode}</td>
-                <td>{row.status}</td>
-                <td>{row.status}</td>
-                <td>{row.syncDate}</td>
-                <td>
-                  <div className="table-actions">
-                    <span className="table-action">🗑️</span>
-                    <span className="table-action">✏️</span>
-                    <span 
-                      className="table-action view-action"
-                      onClick={() => handleViewCity(row)}
-                    >
-                      👁️ View
-                    </span>
-                  </div>
-                </td>
+                </th>
+                <th>City Code</th>
+                <th>City</th>
+                <th>State</th>
+                <th>District</th>
+                <th>Zone</th>
+                <th>Payroll City Code</th>
+                <th>Status</th>
+                <th>Sync Status</th>
+                <th>Sync Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {cities.map((row, index) => (
+                <tr key={index}>
+                  <td>
+                    <input 
+                      type="checkbox" 
+                      checked={selectedCities.includes(row.cityCode)} 
+                      onChange={() => handleCheckboxChange(row.cityCode)}
+                      className="checkbox"
+                    />
+                  </td>
+                  <td>{row.cityCode}</td>
+                  <td>{row.city}</td>
+                  <td>{row.state}</td>
+                  <td>{row.district}</td>
+                  <td>{row.zone}</td>
+                  <td>{row.payrollCityCode}</td>
+                  <td>{row.status}</td>
+                  <td>{row.status}</td>
+                  <td>{row.syncDate}</td>
+                  <td>
+                    <div className="table-actions">
+                      <span className="table-action">🗑️</span>
+                      <span className="table-action">✏️</span>
+                      <span 
+                        className="table-action view-action"
+                        onClick={() => handleViewCity(row)}
+                      >
+                        👁️ View
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
  
       <div className="pagination">
@@ -728,19 +742,31 @@ const CityManagementPage = () => {
           cursor: pointer;
         }
         
-        /* Improved table responsive container */
+        /* Table wrapper with fixed height */
+        .table-container-wrapper {
+          position: relative;
+          margin-bottom: 16px;
+          border: 1px solid #e2e8f0;
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        
+        /* Enhanced table responsive container with both horizontal and vertical scrolling */
         .table-responsive {
           width: 100%;
           overflow-x: auto;
-          margin-bottom: 16px;
+          overflow-y: auto;
+          max-height: 400px; /* Fixed height for vertical scrolling */
           -webkit-overflow-scrolling: touch;
           /* Enhanced scrollbar styles */
           scrollbar-width: thin;
-          scrollbar-color: #007bff #f0f0f0;
+          scrollbar-color:rgb(233, 235, 237) #f0f0f0;
         }
         
+        /* Horizontal scrollbar styles */
         .table-responsive::-webkit-scrollbar {
           height: 8px;
+          width: 8px;
         }
         
         .table-responsive::-webkit-scrollbar-track {
@@ -751,6 +777,10 @@ const CityManagementPage = () => {
         .table-responsive::-webkit-scrollbar-thumb {
           background-color: #007bff;
           border-radius: 4px;
+        }
+        
+        .table-responsive::-webkit-scrollbar-thumb:hover {
+          background-color: #0056b3;
         }
  
         .table-container {
@@ -773,6 +803,11 @@ const CityManagementPage = () => {
           position: sticky;
           top: 0;
           z-index: 10;
+          box-shadow: 0 1px 0 #e2e8f0; /* Creates a border effect even when scrolling */
+        }
+        
+        .table-container tr:hover {
+          background-color: #f5f8ff;
         }
  
         .table-actions {
@@ -786,7 +821,7 @@ const CityManagementPage = () => {
         }
         
         .view-action {
-          color: #007bff;
+          color:rgb(101, 102, 103);
         }
  
         .pagination {
@@ -807,9 +842,9 @@ const CityManagementPage = () => {
         }
  
         .pagination-button.active {
-          background-color: #007bff;
+          background-color:rgb(226, 229, 233);
           color: #fff;
-          border-color: #007bff;
+          border-color:rgb(135, 136, 136);
         }
         
         /* Responsive adjustments */
