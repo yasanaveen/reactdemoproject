@@ -32,7 +32,7 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
     <div className="modal-overlay">
       <div className="modal-content view-modal">
         <div className="modal-header">
-          <h2 className="modal-title">{isNewRecord ? "Add New City" : (isEditing ? "Edit" : "View")}</h2>
+          <h2 className="modal-title">{isNewRecord ? "Add New Field" : (isEditing ? "Edit" : "View")}</h2>
           <button className="close-button" onClick={onClose}>×</button>
         </div>
         
@@ -162,8 +162,8 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
               </>
             ) : (
               <>
-                <button type="button" className="delete-button">Delete</button>
-                <button type="button" className="edit-button" onClick={handleEditToggle}>Edit</button>
+                <button type="button" className="delete-button">Cancel</button>
+                <button type="button" className="edit-button" onClick={handleEditToggle}>Add Field</button>
               </>
             )}
           </div>
