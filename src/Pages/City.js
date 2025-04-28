@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
  
 // View Modal Component
-const CityViewModal = ({ isOpen, onClose, cityData }) => {
-  const [isEditing, setIsEditing] = useState(false);
+const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
+  const [isEditing, setIsEditing] = useState(isNewRecord);
   const [editData, setEditData] = useState({...cityData});
   
   if (!isOpen) return null;
@@ -25,13 +25,14 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
     // Here you would typically save the changes
     // For now, just exit edit mode
     setIsEditing(false);
+    onClose();
   };
   
   return (
     <div className="modal-overlay">
       <div className="modal-content view-modal">
         <div className="modal-header">
-          <h2 className="modal-title">{isEditing ? "Edit" : "View"}</h2>
+          <h2 className="modal-title">{isNewRecord ? "Add New City" : (isEditing ? "Edit" : "View")}</h2>
           <button className="close-button" onClick={onClose}>×</button>
         </div>
         
@@ -42,8 +43,9 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
               <input 
                 type="text" 
                 name="cityId"
-                value={editData.cityCode || '01'} 
-                readOnly 
+                value={editData.cityCode || ''} 
+                onChange={handleChange}
+                readOnly={!isNewRecord}
               />
             </div>
             <div className="view-group">
@@ -51,7 +53,7 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
               <input 
                 type="text" 
                 name="cityCode"
-                value={editData.cityCode || '01'} 
+                value={editData.cityCode || ''} 
                 onChange={handleChange}
                 readOnly={!isEditing} 
               />
@@ -72,34 +74,43 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
           <div className="view-row">
             <div className="view-group">
               <label>Status</label>
-              <input 
-                type="text" 
+              <select
                 name="status"
-                value={editData.status || '01'} 
+                value={editData.status || ''}
                 onChange={handleChange}
-                readOnly={!isEditing}
-              />
+                disabled={!isEditing}
+              >
+                <option value="">Select Status</option>
+                <option value="Updated">Updated</option>
+                <option value="Pending">Pending</option>
+              </select>
             </div>
             <div className="view-group">
               <label>District ID</label>
-              <input 
-                type="text" 
+              <select
                 name="district"
-                value={editData.district || '01'} 
+                value={editData.district || ''}
                 onChange={handleChange}
-                readOnly={!isEditing} 
-              />
+                disabled={!isEditing}
+              >
+                <option value="">Select District</option>
+                <option value="Guntur">Guntur</option>
+                <option value="Krishna">Krishna</option>
+                <option value="Visakhapatnam">Visakhapatnam</option>
+              </select>
             </div>
             <div className="view-group">
               <label>Zone ID</label>
-              <input 
-                type="text" 
+              <select
                 name="zone"
-                placeholder="Enter Value" 
-                value={editData.zone || ''} 
+                value={editData.zone || ''}
                 onChange={handleChange}
-                readOnly={!isEditing} 
-              />
+                disabled={!isEditing}
+              >
+                <option value="">Select Zone</option>
+                <option value="Updated">Updated</option>
+                <option value="Pending">Pending</option>
+              </select>
             </div>
           </div>
           
@@ -116,31 +127,37 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
               />
             </div>
             <div className="view-group">
-              <label>Sync Status</label>
-              <input 
-                type="text" 
-                name="syncStatus"
-                value={editData.status || '01'} 
+              <label>State</label>
+              <select
+                name="state"
+                value={editData.state || ''}
                 onChange={handleChange}
-                readOnly={!isEditing} 
-              />
+                disabled={!isEditing}
+              >
+                <option value="">Select State</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Karnataka">Karnataka</option>
+              </select>
             </div>
-            <div className="view-group">
-              <label>Sync Date</label>
-              <input 
-                type="text" 
-                name="syncDate"
-                value={editData.syncDate || '01'} 
-                onChange={handleChange}
-                readOnly={!isEditing} 
-              />
-            </div>
+            {!isNewRecord && (
+              <div className="view-group">
+                <label>Sync Date</label>
+                <input 
+                  type="text" 
+                  name="syncDate"
+                  value={editData.syncDate || ''} 
+                  onChange={handleChange}
+                  readOnly={true} 
+                />
+              </div>
+            )}
           </div>
           
           <div className="view-actions">
             {isEditing ? (
               <>
-                <button type="button" className="cancel-button" onClick={handleEditToggle}>Cancel</button>
+                <button type="button" className="cancel-button" onClick={isNewRecord ? onClose : handleEditToggle}>Cancel</button>
                 <button type="button" className="save-button" onClick={handleSave}>Save</button>
               </>
             ) : (
@@ -227,7 +244,7 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
           color: #444;
         }
         
-        .view-group input {
+        .view-group input, .view-group select {
           padding: 8px 12px;
           border: 1px solid #e0e0e0;
           border-radius: 4px;
@@ -235,7 +252,7 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
           font-size: 14px;
         }
         
-        .view-group input:not([readonly]) {
+        .view-group input:not([readonly]), .view-group select:not([disabled]) {
           border-color: #4951f5;
           background-color: #f8f9ff;
         }
@@ -281,251 +298,10 @@ const CityViewModal = ({ isOpen, onClose, cityData }) => {
   );
 };
 
-const CityFormModal = ({ isOpen, onClose, onSubmit }) => {
-  const [formData, setFormData] = useState({
-    cityCode: '',
-    city: '',
-    state: '',
-    district: '',
-    zone: '',
-    payrollCityCode: '',
-    status: '',
-  });
- 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
- 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
-    onClose();
-  };
- 
-  const handleClear = () => {
-    setFormData({
-      cityCode: '',
-      city: '',
-      state: '',
-      district: '',
-      zone: '',
-      payrollCityCode: '',
-      status: '',
-    });
-  };
- 
-  if (!isOpen) return null;
- 
-  return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h2 className="modal-title">City</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="cityCode">City Code</label>
-            <input
-              type="text"
-              id="cityCode"
-              name="cityCode"
-              value={formData.cityCode}
-              onChange={handleChange}
-              placeholder="Enter City Code"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="city">City</label>
-            <input
-              type="text"
-              id="city"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              placeholder="Enter City"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="state">State</label>
-            <select
-              id="state"
-              name="state"
-              value={formData.state}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select State</option>
-              <option value="Andhra Pradesh">Andhra Pradesh</option>
-              <option value="Telangana">Telangana</option>
-              <option value="Karnataka">Karnataka</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="district">District</label>
-            <select
-              id="district"
-              name="district"
-              value={formData.district}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select District</option>
-              <option value="Guntur">Guntur</option>
-              <option value="Krishna">Krishna</option>
-              <option value="Visakhapatnam">Visakhapatnam</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="zone">Zone</label>
-            <select
-              id="zone"
-              name="zone"
-              value={formData.zone}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Zone</option>
-              <option value="Updated">Updated</option>
-              <option value="Pending">Pending</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="payrollCityCode">Payroll City Code</label>
-            <input
-              type="text"
-              id="payrollCityCode"
-              name="payrollCityCode"
-              value={formData.payrollCityCode}
-              onChange={handleChange}
-              placeholder="Enter Payroll City Code"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="status">Status</label>
-            <select
-              id="status"
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Status</option>
-              <option value="Updated">Updated</option>
-              <option value="Pending">Pending</option>
-            </select>
-          </div>
-          <div className="form-actions">
-            <button type="button" className="clear-button" onClick={handleClear}>
-              Clear
-            </button>
-            <button type="submit" className="submit-button">
-              Submit
-            </button>
-            <button type="button" className="cancel-button" onClick={onClose}>
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
-      <style>{`
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
-        }
- 
-        .modal-content {
-          background-color: #fff;
-          padding: 24px;
-          border-radius: 8px;
-          width: 500px;
-          max-width: 90%;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
- 
-        .modal-title {
-          font-size: 24px;
-          font-weight: 700;
-          margin-bottom: 24px;
-        }
- 
-        .form-group {
-          margin-bottom: 16px;
-        }
- 
-        .form-group label {
-          display: block;
-          font-size: 14px;
-          font-weight: 600;
-          margin-bottom: 8px;
-          color: #444;
-        }
- 
-        .form-group input,
-        .form-group select {
-          width: 100%;
-          padding: 8px 12px;
-          border: 1px solid #e2e8f0;
-          border-radius: 4px;
-          font-size: 14px;
-          color: #444;
-        }
- 
-        .form-actions {
-          display: flex;
-          justify-content: flex-end;
-          gap: 8px;
-          margin-top: 24px;
-        }
- 
-        .clear-button,
-        .submit-button,
-        .cancel-button {
-          padding: 8px 16px;
-          border-radius: 4px;
-          font-size: 14px;
-          cursor: pointer;
-          border: none;
-        }
- 
-        .clear-button {
-          background-color: #f0f0f0;
-          color: #444;
-        }
- 
-        .submit-button {
-          background-color: #007bff;
-          color: #fff;
-        }
- 
-        .cancel-button {
-          background-color: #e2e8f0;
-          color: #444;
-        }
- 
-        .clear-button:hover,
-        .submit-button:hover,
-        .cancel-button:hover {
-          opacity: 0.9;
-        }
-      `}</style>
-    </div>
-  );
-};
- 
 const CityManagementPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [isNewCity, setIsNewCity] = useState(false);
   const [selectedCities, setSelectedCities] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [cities, setCities] = useState([
@@ -542,15 +318,30 @@ const CityManagementPage = () => {
     { cityCode: '11', city: 'Kochi', state: 'Kerala', district: 'Kochi', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '11' },
     { cityCode: '12', city: 'Lucknow', state: 'Uttar Pradesh', district: 'Lucknow', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '12' },
     { cityCode: '13', city: 'Chandigarh', state: 'Punjab', district: 'Chandigarh', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '13' },
+    { cityCode: '14', city: 'Bhopal', state: 'Madhya Pradesh', district: 'Bhopal', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '14' },
+    { cityCode: '15', city: 'Dehradun', state: 'Uttarakhand', district: 'Dehradun', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '15' },
+    { cityCode: '16', city: 'Patna', state: 'Bihar', district: 'Patna', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '16' },
+    { cityCode: '17', city: 'Raipur', state: 'Chhattisgarh', district: 'Raipur', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '17' },
+    { cityCode: '18', city: 'Ranchi', state: 'Jharkhand', district: 'Ranchi', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '18' },
+    { cityCode: '19', city: 'Agra', state: 'Uttar Pradesh', district: 'Agra', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '19' },
   ]);
- 
-  const handleAddCity = (newCity) => {
-    setCities((prev) => [...prev, { ...newCity, syncDate: 'Updated' }]);
+  
+  const handleOpenAddNewField = () => {
+    setSelectedCity({});  // Empty object for new city
+    setIsNewCity(true);   // Flag to indicate this is a new record
+    setIsViewModalOpen(true);
   };
   
   const handleViewCity = (city) => {
     setSelectedCity(city);
+    setIsNewCity(false);  // This is an existing record
     setIsViewModalOpen(true);
+  };
+  
+  const handleCloseModal = () => {
+    setIsViewModalOpen(false);
+    setSelectedCity(null);
+    setIsNewCity(false);
   };
   
   const handleCheckboxChange = (cityCode) => {
@@ -579,7 +370,7 @@ const CityManagementPage = () => {
           <button className="action-button">Export</button>
           <button
             className="action-button primary"
-            onClick={() => setIsModalOpen(true)}
+            onClick={handleOpenAddNewField}
           >
             Add New Field
           </button>
@@ -670,17 +461,12 @@ const CityManagementPage = () => {
         ))}
         <button className="pagination-button">Next</button>
       </div>
- 
-      <CityFormModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleAddCity}
-      />
       
       <CityViewModal
         isOpen={isViewModalOpen}
-        onClose={() => setIsViewModalOpen(false)}
+        onClose={handleCloseModal}
         cityData={selectedCity || {}}
+        isNewRecord={isNewCity}
       />
  
       <style>{`
@@ -821,7 +607,7 @@ const CityManagementPage = () => {
         }
         
         .view-action {
-          color:rgb(101, 102, 103);
+          color:rgb(117, 120, 126);
         }
  
         .pagination {
