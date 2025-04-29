@@ -176,7 +176,7 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
+          background-color: #000000; /* Changed to solid black */
           display: flex;
           justify-content: center;
           align-items: center;
@@ -533,7 +533,7 @@ const CityManagementPage = () => {
           position: relative;
           margin-bottom: 16px;
           border: 1px solid #e2e8f0;
-          border-radius: 8px;
+          border-radius: 10px;
           overflow: hidden;
         }
         
@@ -577,7 +577,7 @@ const CityManagementPage = () => {
  
         .table-container th,
         .table-container td {
-          padding: 12px;
+          padding: 23px;
           text-align: left;
           border-bottom: 1px solid #e2e8f0;
           white-space: nowrap; /* Prevents text wrapping in cells */
