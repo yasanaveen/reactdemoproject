@@ -542,7 +542,7 @@ const CityManagementPage = () => {
           width: 100%;
           overflow-x: auto;
           overflow-y: auto;
-          max-height: 400px; /* Fixed height for vertical scrolling */
+          max-height: 490px; /* Fixed height for vertical scrolling */
           -webkit-overflow-scrolling: touch;
           /* Enhanced scrollbar styles */
           scrollbar-width: thin;
