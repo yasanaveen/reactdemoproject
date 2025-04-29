@@ -93,11 +93,12 @@ img{
   display: flex;
   /* margin-left: 340px; */
   flex-wrap: wrap;
-  gap: 2px;
+  gap: 5px;
   max-width: 517px;
-  padding: 20px;
+  width:460px;
+  padding: 24px;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 25px;
 }
 .pill-button {
   display: flex;
@@ -118,9 +119,10 @@ img{
 .bodycontainer{
   display: flex;
   flex-direction: row;
-  gap: 250px;
+  gap: 450px;
   
 }
+
 
 .bodycontainer .left-section{
   width:479px;
@@ -489,6 +491,7 @@ img{
   .view-row {
     flex-direction: column;
   }
+  
 }
    
 

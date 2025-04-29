@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 // import { Link } from 'react-router-dom';
+import { Trash2, Pen, Eye } from 'lucide-react';
  
 // View Modal Component
 const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
@@ -29,6 +30,9 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
   };
   
   return (
+
+
+    
     <div className="modal-overlay">
       <div className="modal-content view-modal">
         <div className="modal-header">
@@ -432,14 +436,18 @@ const CityManagementPage = () => {
                   <td>{row.syncDate}</td>
                   <td>
                     <div className="table-actions">
-                      <span className="table-action">🗑️</span>
-                      <span className="table-action">✏️</span>
+                      <span className="table-action"><Trash2 /></span>
+                      <span className="table-action"><Pen /></span>
                       <span 
-                        className="table-action view-action"
-                        onClick={() => handleViewCity(row)}
-                      >
-                        👁️ View
-                      </span>
+  className="table-action view-action"
+  onClick={() => handleViewCity(row)}
+>
+  <span className="icon-text">
+    <Eye className="icon" />
+    <span>View</span>
+  </span>
+</span>
+
                     </div>
                   </td>
                 </tr>
@@ -605,6 +613,18 @@ const CityManagementPage = () => {
           cursor: pointer;
           color: #666;
         }
+        .icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px; /* Adjust spacing between icon and text */
+}
+
+.icon {
+  display: block;
+  width: 16px; /* Optional: match icon size */
+  height: 16px;
+}
+
         
         .view-action {
           color:rgb(117, 120, 126);
@@ -654,6 +674,8 @@ const CityManagementPage = () => {
       `}</style>
     </div>
   );
+
+
 };
  
-export default CityManagementPage;
+export default CityManagementPage; 

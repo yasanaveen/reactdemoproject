@@ -89,7 +89,7 @@ function Header() {
           type="text" 
           placeholder="Ask for anything"
           className="search-input" 
-          style={{ width: '50%', padding: '10px 10px 10px 40px', borderRadius: '20px', border: '1px solid #ddd' }}
+          style={{ width: '30%', padding: '10px 10px 10px 40px', borderRadius: '35px', border: '1px solid #ddd' }}
         />
       </div>
 

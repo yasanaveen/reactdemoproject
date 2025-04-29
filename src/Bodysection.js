@@ -56,7 +56,7 @@ function Bodysection() {
           View personalized profiles tailored to your campus.
         </p>
         <div className="search-wrapper">
-           <FontAwesomeIcon icon={faSearch} className="search-icon" style={{ position: 'absolute', top: '33%', left: '250px', transform: 'translateY(-50%)', color: '#aaa' }} /> 
+           <FontAwesomeIcon icon={faSearch} className="search-icon" style={{ position: 'absolute', top: '30%', left: '250px', transform: 'translateY(-50%)', color: '#aaa' }} /> 
           <input type="text" className="bodyinput" placeholder="Search for the module" style={{ paddingLeft: '40px' }}/>
         </div>
       </div>
