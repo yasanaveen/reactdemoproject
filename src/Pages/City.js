@@ -26,6 +26,10 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
   };
 
   return (
+
+    
+
+
     <div className="modal-overlay">
       <div className="modal-content view-modal">
         <div className="modal-header">
