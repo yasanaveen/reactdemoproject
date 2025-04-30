@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Trash2, Pen, Eye } from 'lucide-react';
+import { Header, SideMenu } from '../App';
 
 // View Form Component (changed to render as an overlay)
 const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
@@ -26,6 +27,12 @@ const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
   };
 
   return (
+
+     <>
+
+     <Header/>
+     <SideMenu/>
+
     <div className="modal-overlay">
       <div className="view-form-container">
         <div className="view-form-content">
@@ -169,10 +176,13 @@ const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
         </div>
       </div>
     </div>
+    </>
   );
+ 
 };
 
 const CityManagementPage = () => {
+
   const [isViewFormOpen, setIsViewFormOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [isNewCity, setIsNewCity] = useState(false);
@@ -325,17 +335,29 @@ const CityManagementPage = () => {
         </div>
       </div>
 
+      {/* Modified pagination to match the provided screenshot */}
       <div className="pagination">
-        <button className="pagination-button">Previous</button>
-        {[1, 2, 3, '...', 8, 9, 10].map((page, index) => (
-          <button
-            key={index}
-            className={`pagination-button ${page === 1 ? 'active' : ''}`}
-          >
-            {page}
-          </button>
-        ))}
-        <button className="pagination-button">Next</button>
+        <button className="pagination-button prev">
+          <svg className="pagination-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Previous
+        </button>
+        
+        <button className="pagination-button active">1</button>
+        <button className="pagination-button">2</button>
+        <button className="pagination-button">3</button>
+        <span className="pagination-ellipsis">...</span>
+        <button className="pagination-button">8</button>
+        <button className="pagination-button">9</button>
+        <button className="pagination-button">10</button>
+        
+        <button className="pagination-button next">
+          Next
+          <svg className="pagination-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
       </div>
 
       {/* Modal form rendered conditionally as overlay */}
@@ -356,6 +378,9 @@ const CityManagementPage = () => {
           border: 1px solid #e2e8f0;
           overflow: hidden;
           position: relative;
+         
+          
+          
         }
 
         .page-header {
@@ -497,41 +522,74 @@ const CityManagementPage = () => {
           color: rgb(117, 120, 126);
         }
 
+        /* Modified pagination styles to match the screenshot */
         .pagination {
           display: flex;
           justify-content: center;
+          align-items: center;
           gap: 8px;
           margin-top: 16px;
-          flex-wrap: wrap;
         }
 
         .pagination-button {
-          padding: 8px 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 36px;
+          min-width: 36px;
+          padding: 0 12px;
           border: 1px solid #e2e8f0;
-          border-radius: 8px;
-          cursor: pointer;
+          border-radius: 4px;
           background-color: #fff;
+          color: #444;
           font-size: 14px;
+          cursor: pointer;
+          transition: all 0.2s;
         }
 
         .pagination-button.active {
-          background-color: rgb(226, 229, 233);
-          color: #fff;
-          border-color: rgb(135, 136, 136);
+          background-color: #1a73e8;
+          color: white;
+          border-color: #1a73e8;
+        }
+
+        .pagination-button:hover:not(.active) {
+          background-color: #f8f9fa;
+        }
+
+        .pagination-button.prev,
+        .pagination-button.next {
+          padding: 0 16px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .pagination-arrow {
+          width: 16px;
+          height: 16px;
+        }
+
+        .pagination-ellipsis {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 36px;
+          color: #6b7280;
         }
 
         /* Modal overlay styles */
         .modal-overlay {
           position: fixed;
-          top: 0;
-          left: 0;
+          top:77px;
+          left: 240px;
           right: 0;
           bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
+          background-color: black;
           display: flex;
           justify-content: center;
           align-items: center;
-          z-index: 1000;
+          z-index: 9999;
         }
 
         /* Form styles */
@@ -638,33 +696,6 @@ const CityManagementPage = () => {
           cursor: pointer;
           font-weight: 500;
           font-size: 12px;
-        }
-
-        @media screen and (max-width: 768px) {
-          .page-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 16px;
-          }
-          
-          .page-actions {
-            width: 100%;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-          }
-          
-          .pagination {
-            padding: 8px 0;
-          }
-          
-          .view-form-content {
-            width: 90%;
-            min-width: auto;
-          }
-          
-          .view-row {
-            flex-direction: column;
-          }
         }
       `}</style>
     </div>
