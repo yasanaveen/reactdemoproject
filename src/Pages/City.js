@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Trash2, Pen, Eye } from 'lucide-react';
 
-// View Modal Component
-const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
+// View Form Component (changed to render as an overlay)
+const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
   const [isEditing, setIsEditing] = useState(isNewRecord);
   const [editData, setEditData] = useState({ ...cityData });
 
@@ -26,271 +26,154 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
   };
 
   return (
-
-    
-
-
     <div className="modal-overlay">
-      <div className="modal-content view-modal">
-        <div className="modal-header">
-          <h2 className="modal-title">{isNewRecord ? "Add New Field" : (isEditing ? "Edit" : "View")}</h2>
-          <button className="close-button" onClick={onClose}>×</button>
-        </div>
-
-        <div className="view-form">
-          <div className="view-row">
-            <div className="view-group">
-              <label>City ID</label>
-              <input
-                type="text"
-                name="cityId"
-                value={editData.cityCode || ''}
-                onChange={handleChange}
-                readOnly={!isNewRecord}
-              />
-            </div>
-            <div className="view-group">
-              <label>City Code</label>
-              <input
-                type="text"
-                name="cityCode"
-                value={editData.cityCode || ''}
-                onChange={handleChange}
-                readOnly={!isEditing}
-              />
-            </div>
-            <div className="view-group">
-              <label>City Name</label>
-              <input
-                type="text"
-                name="city"
-                placeholder="Enter Value"
-                value={editData.city || ''}
-                onChange={handleChange}
-                readOnly={!isEditing}
-              />
-            </div>
+      <div className="view-form-container">
+        <div className="view-form-content">
+          <div className="form-header">
+            <h2 className="form-title">{isNewRecord ? "Add New Field" : (isEditing ? "Edit" : "View")}</h2>
+            <button className="close-button" onClick={onClose}>×</button>
           </div>
 
-          <div className="view-row">
-            <div className="view-group">
-              <label>Status</label>
-              <select
-                name="status"
-                value={editData.status || ''}
-                onChange={handleChange}
-                disabled={!isEditing}
-              >
-                <option value="">Select Status</option>
-                <option value="Updated">Updated</option>
-                <option value="Pending">Pending</option>
-              </select>
-            </div>
-            <div className="view-group">
-              <label>District ID</label>
-              <select
-                name="district"
-                value={editData.district || ''}
-                onChange={handleChange}
-                disabled={!isEditing}
-              >
-                <option value="">Select District</option>
-                <option value="Guntur">Guntur</option>
-                <option value="Krishna">Krishna</option>
-                <option value="Visakhapatnam">Visakhapatnam</option>
-              </select>
-            </div>
-            <div className="view-group">
-              <label>Zone ID</label>
-              <select
-                name="zone"
-                value={editData.zone || ''}
-                onChange={handleChange}
-                disabled={!isEditing}
-              >
-                <option value="">Select Zone</option>
-                <option value="Updated">Updated</option>
-                <option value="Pending">Pending</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="view-row">
-            <div className="view-group">
-              <label>Payroll City Code</label>
-              <input
-                type="text"
-                name="payrollCityCode"
-                placeholder="Enter Value"
-                value={editData.payrollCityCode || ''}
-                onChange={handleChange}
-                readOnly={!isEditing}
-              />
-            </div>
-            <div className="view-group">
-              <label>State</label>
-              <select
-                name="state"
-                value={editData.state || ''}
-                onChange={handleChange}
-                disabled={!isEditing}
-              >
-                <option value="">Select State</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Telangana">Telangana</option>
-                <option value="Karnataka">Karnataka</option>
-              </select>
-            </div>
-            {!isNewRecord && (
+          <div className="view-form">
+            <div className="view-row">
               <div className="view-group">
-                <label>Sync Date</label>
+                <label>City ID</label>
                 <input
                   type="text"
-                  name="syncDate"
-                  value={editData.syncDate || ''}
+                  name="cityId"
+                  value={editData.cityCode || ''}
                   onChange={handleChange}
-                  readOnly={true}
+                  readOnly={!isNewRecord}
                 />
               </div>
-            )}
-          </div>
+              <div className="view-group">
+                <label>City Code</label>
+                <input
+                  type="text"
+                  name="cityCode"
+                  value={editData.cityCode || ''}
+                  onChange={handleChange}
+                  readOnly={!isEditing}
+                />
+              </div>
+              <div className="view-group">
+                <label>City Name</label>
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="Enter Value"
+                  value={editData.city || ''}
+                  onChange={handleChange}
+                  readOnly={!isEditing}
+                />
+              </div>
+            </div>
 
-          <div className="view-actions">
-            {isEditing ? (
-              <>
-                <button type="button" className="cancel-button" onClick={isNewRecord ? onClose : handleEditToggle}>Cancel</button>
-                <button type="button" className="save-button" onClick={handleSave}>Save</button>
-              </>
-            ) : (
-              <>
-                <button type="button" className="delete-button">Delete</button>
-                <button type="button" className="edit-button" onClick={handleEditToggle}>Edit</button>
-              </>
-            )}
+            <div className="view-row">
+              <div className="view-group">
+                <label>Status</label>
+                <select
+                  name="status"
+                  value={editData.status || ''}
+                  onChange={handleChange}
+                  disabled={!isEditing}
+                >
+                  <option value="">Select Status</option>
+                  <option value="Updated">Updated</option>
+                  <option value="Pending">Pending</option>
+                </select>
+              </div>
+              <div className="view-group">
+                <label>District ID</label>
+                <select
+                  name="district"
+                  value={editData.district || ''}
+                  onChange={handleChange}
+                  disabled={!isEditing}
+                >
+                  <option value="">Select District</option>
+                  <option value="Guntur">Guntur</option>
+                  <option value="Krishna">Krishna</option>
+                  <option value="Visakhapatnam">Visakhapatnam</option>
+                </select>
+              </div>
+              <div className="view-group">
+                <label>Zone ID</label>
+                <select
+                  name="zone"
+                  value={editData.zone || ''}
+                  onChange={handleChange}
+                  disabled={!isEditing}
+                >
+                  <option value="">Select Zone</option>
+                  <option value="Updated">Updated</option>
+                  <option value="Pending">Pending</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="view-row">
+              <div className="view-group">
+                <label>Payroll City Code</label>
+                <input
+                  type="text"
+                  name="payrollCityCode"
+                  placeholder="Enter Value"
+                  value={editData.payrollCityCode || ''}
+                  onChange={handleChange}
+                  readOnly={!isEditing}
+                />
+              </div>
+              <div className="view-group">
+                <label>State</label>
+                <select
+                  name="state"
+                  value={editData.state || ''}
+                  onChange={handleChange}
+                  disabled={!isEditing}
+                >
+                  <option value="">Select State</option>
+                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                  <option value="Telangana">Telangana</option>
+                  <option value="Karnataka">Karnataka</option>
+                </select>
+              </div>
+              {!isNewRecord && (
+                <div className="view-group">
+                  <label>Sync Date</label>
+                  <input
+                    type="text"
+                    name="syncDate"
+                    value={editData.syncDate || ''}
+                    onChange={handleChange}
+                    readOnly={true}
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="view-actions">
+              {isEditing ? (
+                <>
+                  <button type="button" className="cancel-button" onClick={isNewRecord ? onClose : handleEditToggle}>Cancel</button>
+                  <button type="button" className="save-button" onClick={handleSave}>Save</button>
+                </>
+              ) : (
+                <>
+                  <button type="button" className="delete-button">Delete</button>
+                  <button type="button" className="edit-button" onClick={handleEditToggle}>Edit</button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
-      <style>{`
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
-        }
-        
-        .modal-content.view-modal {
-          background-color: #fff;
-          padding: 20px;
-          border-radius: 8px;
-          width: 650px;
-          max-width: 95%;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        .modal-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 20px;
-        }
-        
-        .modal-title {
-          font-size: 20px;
-          font-weight: 600;
-          margin: 0;
-        }
-        
-        .close-button {
-          background: none;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
-          color: #333;
-          padding: 0;
-          line-height: 1;
-        }
-        
-        .view-form {
-          display: flex;
-          flex-direction: column;
-          gap: 32px;
-          top: 214px;
-          left: 360px;
-          padding: 24px;
-          border-radius: 12px;
-        }
-        
-        .view-row {
-          display: flex;
-          gap: 16px;
-          width: 100%;
-        }
-        
-        .view-group {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-        
-        .view-group label {
-          font-size: 14px;
-          font-weight: 500;
-          color: #444;
-        }
-        
-        .view-group input, .view-group select {
-          padding: 8px 12px;
-          border: 1px solid #e0e0e0;
-          border-radius: 4px;
-          background-color: #fff;
-          font-size: 14px;
-        }
-        
-        .view-group input:not([readonly]), .view-group select:not([disabled]) {
-          border-color: #4951f5;
-          background-color: #f8f9ff;
-        }
-        
-        .view-actions {
-          display: flex;
-          gap: 8px;
-          justify-content: flex-end;
-          margin-top: 24px;
-        }
-        
-        .delete-button, .cancel-button {
-          padding: 8px 24px;
-          border-radius: 4px;
-          background-color: white;
-          color: #ff4d4f;
-          border: 1px solid #ff4d4f;
-          cursor: pointer;
-          font-weight: 500;
-        }
-        
-        .edit-button, .save-button {
-          padding: 8px 32px;
-          border-radius: 4px;
-          background-color: #4951f5;
-          color: white;
-          border: none;
-          cursor: pointer;
-          font-weight: 500;
-        }
-      `}</style>
     </div>
   );
 };
 
 const CityManagementPage = () => {
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [isViewFormOpen, setIsViewFormOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [isNewCity, setIsNewCity] = useState(false);
   const [selectedCities, setSelectedCities] = useState([]);
@@ -320,17 +203,17 @@ const CityManagementPage = () => {
   const handleOpenAddNewField = () => {
     setSelectedCity({});
     setIsNewCity(true);
-    setIsViewModalOpen(true);
+    setIsViewFormOpen(true);
   };
 
   const handleViewCity = (city) => {
     setSelectedCity(city);
     setIsNewCity(false);
-    setIsViewModalOpen(true);
+    setIsViewFormOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsViewModalOpen(false);
+  const handleCloseForm = () => {
+    setIsViewFormOpen(false);
     setSelectedCity(null);
     setIsNewCity(false);
   };
@@ -455,12 +338,15 @@ const CityManagementPage = () => {
         <button className="pagination-button">Next</button>
       </div>
 
-      <CityViewModal
-        isOpen={isViewModalOpen}
-        onClose={handleCloseModal}
-        cityData={selectedCity || {}}
-        isNewRecord={isNewCity}
-      />
+      {/* Modal form rendered conditionally as overlay */}
+      {isViewFormOpen && (
+        <CityViewForm
+          isOpen={isViewFormOpen}
+          onClose={handleCloseForm}
+          cityData={selectedCity || {}}
+          isNewRecord={isNewCity}
+        />
+      )}
 
       <style>{`
         .page-content {
@@ -468,7 +354,8 @@ const CityManagementPage = () => {
           background-color: #ffffff;
           border-radius: 8px;
           border: 1px solid #e2e8f0;
-          overflow: hidden; /* Prevent overall page scrolling */
+          overflow: hidden;
+          position: relative;
         }
 
         .page-header {
@@ -531,9 +418,9 @@ const CityManagementPage = () => {
         
         .table-responsive {
           width: 100%;
-          overflow-x: auto; /* Enable horizontal scrolling */
-          overflow-y: auto; /* Enable vertical scrolling */
-          max-height: 400px; /* Fixed height to trigger vertical scrolling */
+          overflow-x: auto;
+          overflow-y: auto;
+          max-height: 400px;
           -webkit-overflow-scrolling: touch;
           scrollbar-width: thin;
           scrollbar-color: rgb(233, 235, 237) #f0f0f0;
@@ -561,7 +448,7 @@ const CityManagementPage = () => {
         .table-container {
           width: 100%;
           border-collapse: collapse;
-          min-width: 1200px; /* Ensure horizontal scrolling */
+          min-width: 1200px;
         }
 
         .table-container th,
@@ -632,7 +519,127 @@ const CityManagementPage = () => {
           color: #fff;
           border-color: rgb(135, 136, 136);
         }
+
+        /* Modal overlay styles */
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+
+        /* Form styles */
+        .view-form-container {
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .view-form-content {
+          background-color: #fff;
+          padding: 16px;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
         
+        .form-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 12px;
+        }
+        
+        .form-title {
+          font-size: 16px;
+          font-weight: 600;
+          margin: 0;
+        }
+        
+        .close-button {
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          color: #333;
+          padding: 0;
+          line-height: 1;
+        }
+        
+        .view-form {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          padding: 16px;
+          border-radius: 8px;
+        }
+        
+        .view-row {
+          display: flex;
+          gap: 12px;
+          width: 100%;
+        }
+        
+        .view-group {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        
+        .view-group label {
+          font-size: 12px;
+          font-weight: 500;
+          color: #444;
+        }
+        
+        .view-group input, .view-group select {
+          padding: 6px 8px;
+          border: 1px solid #e0e0e0;
+          border-radius: 4px;
+          background-color: #fff;
+          font-size: 13px;
+        }
+        
+        .view-group input:not([readonly]), .view-group select:not([disabled]) {
+          border-color: #4951f5;
+          background-color: #f8f9ff;
+        }
+        
+        .view-actions {
+          display: flex;
+          gap: 8px;
+          justify-content: flex-end;
+          margin-top: 16px;
+        }
+        
+        .delete-button, .cancel-button {
+          padding: 6px 16px;
+          border-radius: 4px;
+          background-color: white;
+          color: #ff4d4f;
+          border: 1px solid #ff4d4f;
+          cursor: pointer;
+          font-weight: 500;
+          font-size: 12px;
+        }
+        
+        .edit-button, .save-button {
+          padding: 6px 20px;
+          border-radius: 4px;
+          background-color: #4951f5;
+          color: white;
+          border: none;
+          cursor: pointer;
+          font-weight: 500;
+          font-size: 12px;
+        }
+
         @media screen and (max-width: 768px) {
           .page-header {
             flex-direction: column;
@@ -648,6 +655,15 @@ const CityManagementPage = () => {
           
           .pagination {
             padding: 8px 0;
+          }
+          
+          .view-form-content {
+            width: 90%;
+            min-width: auto;
+          }
+          
+          .view-row {
+            flex-direction: column;
           }
         }
       `}</style>
