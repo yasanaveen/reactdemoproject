@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Trash2, Pen, Eye } from 'lucide-react';
 import { Header, SideMenu } from '../App';
 
-// View Form Component (changed to render as an overlay)
+// View Form Component redesigned to match screenshot 2
 const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
   const [isEditing, setIsEditing] = useState(isNewRecord);
   const [editData, setEditData] = useState({ ...cityData });
@@ -35,33 +35,34 @@ const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
         <div className="view-form-container">
           <div className="view-form-content">
             <div className="form-header">
-              <h2 className="form-title">{isNewRecord ? "Add New Field" : (isEditing ? "Edit" : "View")}</h2>
+              <h2 className="form-title">View</h2>
               <button className="close-button" onClick={onClose}>×</button>
             </div>
 
             <div className="view-form">
-              <div className="view-row">
-                <div className="view-group">
+              <div className="view-form-grid">
+                {/* First row */}
+                <div className="form-group">
                   <label>City ID</label>
                   <input
                     type="text"
                     name="cityId"
-                    value={editData.cityCode || ''}
+                    value={editData.cityCode || '01'}
                     onChange={handleChange}
                     readOnly={!isNewRecord}
                   />
                 </div>
-                <div className="view-group">
+                <div className="form-group">
                   <label>City Code</label>
                   <input
                     type="text"
                     name="cityCode"
-                    value={editData.cityCode || ''}
+                    value={editData.cityCode || '01'}
                     onChange={handleChange}
                     readOnly={!isEditing}
                   />
                 </div>
-                <div className="view-group">
+                <div className="form-group">
                   <label>City Name</label>
                   <input
                     type="text"
@@ -72,53 +73,42 @@ const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
                     readOnly={!isEditing}
                   />
                 </div>
-              </div>
 
-              <div className="view-row">
-                <div className="view-group">
+                {/* Second row */}
+                <div className="form-group">
                   <label>Status</label>
-                  <select
+                  <input
+                    type="text"
                     name="status"
-                    value={editData.status || ''}
+                    value={editData.status || '01'}
                     onChange={handleChange}
-                    disabled={!isEditing}
-                  >
-                    <option value="">Select Status</option>
-                    <option value="Updated">Updated</option>
-                    <option value="Pending">Pending</option>
-                  </select>
+                    readOnly={!isEditing}
+                  />
                 </div>
-                <div className="view-group">
+                <div className="form-group">
                   <label>District ID</label>
-                  <select
+                  <input
+                    type="text"
                     name="district"
-                    value={editData.district || ''}
+                    value={editData.district || '01'}
                     onChange={handleChange}
-                    disabled={!isEditing}
-                  >
-                    <option value="">Select District</option>
-                    <option value="Guntur">Guntur</option>
-                    <option value="Krishna">Krishna</option>
-                    <option value="Visakhapatnam">Visakhapatnam</option>
-                  </select>
+                    readOnly={!isEditing}
+                  />
                 </div>
-                <div className="view-group">
+                <div className="form-group">
                   <label>Zone ID</label>
-                  <select
+                  <input
+                    type="text"
                     name="zone"
+                    placeholder="Enter Value"
                     value={editData.zone || ''}
                     onChange={handleChange}
-                    disabled={!isEditing}
-                  >
-                    <option value="">Select Zone</option>
-                    <option value="Updated">Updated</option>
-                    <option value="Pending">Pending</option>
-                  </select>
+                    readOnly={!isEditing}
+                  />
                 </div>
-              </div>
 
-              <div className="view-row">
-                <div className="view-group">
+                {/* Third row */}
+                <div className="form-group">
                   <label>Payroll City Code</label>
                   <input
                     type="text"
@@ -129,46 +119,31 @@ const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
                     readOnly={!isEditing}
                   />
                 </div>
-                <div className="view-group">
-                  <label>State</label>
-                  <select
-                    name="state"
-                    value={editData.state || ''}
+                <div className="form-group">
+                  <label>Sync Status</label>
+                  <input
+                    type="text"
+                    name="syncStatus"
+                    value={editData.syncStatus || '01'}
                     onChange={handleChange}
-                    disabled={!isEditing}
-                  >
-                    <option value="">Select State</option>
-                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                    <option value="Telangana">Telangana</option>
-                    <option value="Karnataka">Karnataka</option>
-                  </select>
+                    readOnly={!isEditing}
+                  />
                 </div>
-                {!isNewRecord && (
-                  <div className="view-group">
-                    <label>Sync Date</label>
-                    <input
-                      type="text"
-                      name="syncDate"
-                      value={editData.syncDate || ''}
-                      onChange={handleChange}
-                      readOnly={true}
-                    />
-                  </div>
-                )}
+                <div className="form-group">
+                  <label>Sync Date</label>
+                  <input
+                    type="text"
+                    name="syncDate"
+                    value={editData.syncDate || '01'}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                  />
+                </div>
               </div>
 
               <div className="view-actions">
-                {isEditing ? (
-                  <>
-                    <button type="button" className="cancel-button" onClick={isNewRecord ? onClose : handleEditToggle}>Cancel</button>
-                    <button type="button" className="save-button" onClick={handleSave}>Save</button>
-                  </>
-                ) : (
-                  <>
-                    <button type="button" className="delete-button">Delete</button>
-                    <button type="button" className="edit-button" onClick={handleEditToggle}>Edit</button>
-                  </>
-                )}
+                <button type="button" className="delete-button">Delete</button>
+                <button type="button" className="edit-button" onClick={handleEditToggle}>Edit</button>
               </div>
             </div>
           </div>
@@ -178,6 +153,7 @@ const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
   );
 };
 
+// Main component remains the same
 const CityManagementPage = () => {
   const [isViewFormOpen, setIsViewFormOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
@@ -343,7 +319,6 @@ const CityManagementPage = () => {
           </div>
         </div>
 
-        {/* Modified pagination to match the provided screenshot */}
         <div className="pagination">
           <button className="pagination-button prev">
             <svg className="pagination-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -427,9 +402,9 @@ const CityManagementPage = () => {
           }
 
           .action-button.primary {
-            background-color:rgb(76, 134, 250);
+            background-color: rgb(76, 134, 250);
             color: #fff;
-            border-color:rgb(79, 64, 246);
+            border-color: rgb(79, 64, 246);
           }
           
           .bulk-actions {
@@ -449,7 +424,7 @@ const CityManagementPage = () => {
             cursor: pointer;
           }
           
-          /* Table container styles modified for fixed header */
+          /* Table container styles */
           .table-container-wrapper {
             display: flex;
             flex-direction: column;
@@ -458,7 +433,7 @@ const CityManagementPage = () => {
             overflow: hidden;
             margin-bottom: 16px;
             flex-grow: 1;
-            min-height: 0; /* Important for Firefox */
+            min-height: 0;
           }
           
           .table-header {
@@ -479,8 +454,8 @@ const CityManagementPage = () => {
             overflow-y: auto;
             overflow-x: auto;
             width: 100%;
-            min-height: 0; /* Important for Firefox */
-            max-height: calc(100vh - 300px); /* Adjust if needed */
+            min-height: 0;
+            max-height: calc(100vh - 300px);
           }
           
           .table-container {
@@ -546,15 +521,15 @@ const CityManagementPage = () => {
           }
           
           .table-body::-webkit-scrollbar-thumb {
-            background-color:rgb(194, 195, 196);
+            background-color: rgb(194, 195, 196);
             border-radius: 4px;
           }
           
           .table-body::-webkit-scrollbar-thumb:hover {
-            background-color:rgb(233, 236, 238);
+            background-color: rgb(233, 236, 238);
           }
 
-          /* Modified pagination styles */
+          /* Pagination styles */
           .pagination {
             display: flex;
             justify-content: center;
@@ -578,7 +553,6 @@ const CityManagementPage = () => {
             font-size: 14px;
             cursor: pointer;
             transition: all 0.2s;
-           
           }
 
           .pagination-button.active {
@@ -616,7 +590,7 @@ const CityManagementPage = () => {
           .modal-overlay {
             position: fixed;
             top: 77px;
-            left: 240px;
+            left: 240px;;
             right: 0;
             bottom: 0;
             background-color: black;
@@ -626,16 +600,15 @@ const CityManagementPage = () => {
             z-index: 9999;
           }
 
-          /* Form styles */
+          /* Form styles redesigned to match screenshot 2 */
           .view-form-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 450px; /* Adjusted width to match screenshot */
             margin: 0 auto;
           }
 
           .view-form-content {
             background-color: #fff;
-            padding: 16px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
           }
@@ -644,7 +617,8 @@ const CityManagementPage = () => {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
           }
           
           .form-title {
@@ -656,7 +630,7 @@ const CityManagementPage = () => {
           .close-button {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
             color: #333;
             padding: 0;
@@ -666,70 +640,70 @@ const CityManagementPage = () => {
           .view-form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            padding: 16px;
-            border-radius: 8px;
+            padding: 22px;
           }
           
-          .view-row {
-            display: flex;
+          /* Grid layout for the form fields */
+          .view-form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            width: 100%;
+            margin-bottom: 20px;
           }
           
-          .view-group {
-            flex: 1;
+          .form-group {
             display: flex;
             flex-direction: column;
             gap: 4px;
           }
           
-          .view-group label {
+          .form-group label {
             font-size: 12px;
-            font-weight: 500;
             color: #444;
+            font-weight: normal;
           }
           
-          .view-group input, .view-group select {
-            padding: 6px 8px;
+          .form-group input {
+            padding: 8px 10px;
             border: 1px solid #e0e0e0;
             border-radius: 4px;
-            background-color: #fff;
-            font-size: 13px;
+            font-size: 14px;
+            width: 100%;
           }
           
-          .view-group input:not([readonly]), .view-group select:not([disabled]) {
-            border-color: #4951f5;
-            background-color: #f8f9ff;
+          .form-group input::placeholder {
+            color: #aaa;
           }
           
           .view-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             justify-content: flex-end;
-            margin-top: 16px;
+            margin-top: 8px;
+            padding-top: 16px;
+            border-top: 1px solid #e2e8f0;
           }
           
-          .delete-button, .cancel-button {
-            padding: 6px 16px;
+          .delete-button {
+            padding: 8px 20px;
             border-radius: 4px;
             background-color: white;
             color: #ff4d4f;
             border: 1px solid #ff4d4f;
             cursor: pointer;
             font-weight: 500;
-            font-size: 12px;
+            font-size: 14px;
           }
           
-          .edit-button, .save-button {
-            padding: 6px 20px;
+          .edit-button {
+            padding: 8px 24px;
             border-radius: 4px;
             background-color: #4951f5;
             color: white;
             border: none;
             cursor: pointer;
             font-weight: 500;
-            font-size: 12px;
+            font-size: 14px;
           }
         `}</style>
       </div>
