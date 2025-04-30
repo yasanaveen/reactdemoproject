@@ -1,80 +1,73 @@
 import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
 import { Trash2, Pen, Eye } from 'lucide-react';
- 
+
 // View Modal Component
 const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
   const [isEditing, setIsEditing] = useState(isNewRecord);
-  const [editData, setEditData] = useState({...cityData});
-  
+  const [editData, setEditData] = useState({ ...cityData });
+
   if (!isOpen) return null;
-  
+
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
-    // Reset to original data if canceling edit
     if (isEditing) {
-      setEditData({...cityData});
+      setEditData({ ...cityData });
     }
   };
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEditData(prev => ({...prev, [name]: value}));
+    setEditData((prev) => ({ ...prev, [name]: value }));
   };
-  
+
   const handleSave = () => {
-    // Here you would typically save the changes
-    // For now, just exit edit mode
     setIsEditing(false);
     onClose();
   };
-  
+
   return (
-
-
-    
     <div className="modal-overlay">
       <div className="modal-content view-modal">
         <div className="modal-header">
           <h2 className="modal-title">{isNewRecord ? "Add New Field" : (isEditing ? "Edit" : "View")}</h2>
           <button className="close-button" onClick={onClose}>×</button>
         </div>
-        
+
         <div className="view-form">
           <div className="view-row">
             <div className="view-group">
               <label>City ID</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="cityId"
-                value={editData.cityCode || ''} 
+                value={editData.cityCode || ''}
                 onChange={handleChange}
                 readOnly={!isNewRecord}
               />
             </div>
             <div className="view-group">
               <label>City Code</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="cityCode"
-                value={editData.cityCode || ''} 
+                value={editData.cityCode || ''}
                 onChange={handleChange}
-                readOnly={!isEditing} 
+                readOnly={!isEditing}
               />
             </div>
             <div className="view-group">
               <label>City Name</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="city"
-                placeholder="Enter Value" 
-                value={editData.city || ''} 
+                placeholder="Enter Value"
+                value={editData.city || ''}
                 onChange={handleChange}
-                readOnly={!isEditing} 
+                readOnly={!isEditing}
               />
             </div>
           </div>
-          
+
           <div className="view-row">
             <div className="view-group">
               <label>Status</label>
@@ -117,17 +110,17 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
               </select>
             </div>
           </div>
-          
+
           <div className="view-row">
             <div className="view-group">
               <label>Payroll City Code</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="payrollCityCode"
-                placeholder="Enter Value" 
-                value={editData.payrollCityCode || ''} 
+                placeholder="Enter Value"
+                value={editData.payrollCityCode || ''}
                 onChange={handleChange}
-                readOnly={!isEditing} 
+                readOnly={!isEditing}
               />
             </div>
             <div className="view-group">
@@ -147,17 +140,17 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
             {!isNewRecord && (
               <div className="view-group">
                 <label>Sync Date</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   name="syncDate"
-                  value={editData.syncDate || ''} 
+                  value={editData.syncDate || ''}
                   onChange={handleChange}
-                  readOnly={true} 
+                  readOnly={true}
                 />
               </div>
             )}
           </div>
-          
+
           <div className="view-actions">
             {isEditing ? (
               <>
@@ -166,7 +159,7 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
               </>
             ) : (
               <>
-                <button type="button" className="delete-button">Cancel</button>
+                <button type="button" className="delete-button">Delete</button>
                 <button type="button" className="edit-button" onClick={handleEditToggle}>Edit</button>
               </>
             )}
@@ -180,7 +173,7 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: #000000; /* Changed to solid black */
+          background-color: rgba(0, 0, 0, 0.5);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -223,10 +216,10 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
           display: flex;
           flex-direction: column;
           gap: 32px;
-          top:214px;
-          left:360px;
+          top: 214px;
+          left: 360px;
           padding: 24px;
-          radius: 12px;
+          border-radius: 12px;
         }
         
         .view-row {
@@ -268,7 +261,7 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
           margin-top: 24px;
         }
         
-        .delete-button {
+        .delete-button, .cancel-button {
           padding: 8px 24px;
           border-radius: 4px;
           background-color: white;
@@ -287,16 +280,6 @@ const CityViewModal = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
           cursor: pointer;
           font-weight: 500;
         }
-        
-        .cancel-button {
-          padding: 8px 24px;
-          border-radius: 4px;
-          background-color: #f0f0f0;
-          color: #444;
-          border: none;
-          cursor: pointer;
-          font-weight: 500;
-        }
       `}</style>
     </div>
   );
@@ -310,7 +293,7 @@ const CityManagementPage = () => {
   const [selectAll, setSelectAll] = useState(false);
   const [cities, setCities] = useState([
     { cityCode: '01', city: 'Guntur', state: 'Andhra Pradesh', district: 'Guntur', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '01' },
-    { cityCode: '02', city: 'Hyderabd', state: 'Telangana', district: 'Hyderabad', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '02' },
+    { cityCode: '02', city: 'Hyderabd', state: "Telangana", district: "Hyderabad", zone: "Updated", payrollCityCode: "Updated", status: "Updated", syncDate: "02" },
     { cityCode: '03', city: 'Bangalore', state: 'Karnataka', district: 'Bangalore', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '03' },
     { cityCode: '04', city: 'Chennai', state: 'Tamil Nadu', district: 'Chennai', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '04' },
     { cityCode: '05', city: 'Mumbai', state: 'Maharashtra', district: 'Mumbai', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '05' },
@@ -329,42 +312,42 @@ const CityManagementPage = () => {
     { cityCode: '18', city: 'Ranchi', state: 'Jharkhand', district: 'Ranchi', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '18' },
     { cityCode: '19', city: 'Agra', state: 'Uttar Pradesh', district: 'Agra', zone: 'Updated', payrollCityCode: 'Updated', status: 'Updated', syncDate: '19' },
   ]);
-  
+
   const handleOpenAddNewField = () => {
-    setSelectedCity({});  // Empty object for new city
-    setIsNewCity(true);   // Flag to indicate this is a new record
+    setSelectedCity({});
+    setIsNewCity(true);
     setIsViewModalOpen(true);
   };
-  
+
   const handleViewCity = (city) => {
     setSelectedCity(city);
-    setIsNewCity(false);  // This is an existing record
+    setIsNewCity(false);
     setIsViewModalOpen(true);
   };
-  
+
   const handleCloseModal = () => {
     setIsViewModalOpen(false);
     setSelectedCity(null);
     setIsNewCity(false);
   };
-  
+
   const handleCheckboxChange = (cityCode) => {
     if (selectedCities.includes(cityCode)) {
-      setSelectedCities(selectedCities.filter(code => code !== cityCode));
+      setSelectedCities(selectedCities.filter((code) => code !== cityCode));
     } else {
       setSelectedCities([...selectedCities, cityCode]);
     }
   };
-  
+
   const handleSelectAllChange = () => {
     if (selectAll) {
       setSelectedCities([]);
     } else {
-      setSelectedCities(cities.map(city => city.cityCode));
+      setSelectedCities(cities.map((city) => city.cityCode));
     }
     setSelectAll(!selectAll);
   };
- 
+
   return (
     <div className="page-content">
       <div className="page-header">
@@ -380,24 +363,23 @@ const CityManagementPage = () => {
           </button>
         </div>
       </div>
-      
+
       {selectedCities.length > 0 && (
         <div className="bulk-actions">
           <span>{selectedCities.length} items selected</span>
           <button className="action-button">Delete Selected</button>
         </div>
       )}
- 
-      {/* Table Container with Fixed Height and Vertical Scrolling */}
+
       <div className="table-container-wrapper">
         <div className="table-responsive">
           <table className="table-container">
             <thead>
               <tr>
                 <th>
-                  <input 
-                    type="checkbox" 
-                    checked={selectAll} 
+                  <input
+                    type="checkbox"
+                    checked={selectAll}
                     onChange={handleSelectAllChange}
                     className="checkbox"
                   />
@@ -418,9 +400,9 @@ const CityManagementPage = () => {
               {cities.map((row, index) => (
                 <tr key={index}>
                   <td>
-                    <input 
-                      type="checkbox" 
-                      checked={selectedCities.includes(row.cityCode)} 
+                    <input
+                      type="checkbox"
+                      checked={selectedCities.includes(row.cityCode)}
                       onChange={() => handleCheckboxChange(row.cityCode)}
                       className="checkbox"
                     />
@@ -438,16 +420,15 @@ const CityManagementPage = () => {
                     <div className="table-actions">
                       <span className="table-action"><Trash2 /></span>
                       <span className="table-action"><Pen /></span>
-                      <span 
-  className="table-action view-action"
-  onClick={() => handleViewCity(row)}
->
-  <span className="icon-text">
-    <Eye className="icon" />
-    <span>View</span>
-  </span>
-</span>
-
+                      <span
+                        className="table-action view-action"
+                        onClick={() => handleViewCity(row)}
+                      >
+                        <span className="icon-text">
+                          <Eye className="icon" />
+                          <span>View</span>
+                        </span>
+                      </span>
                     </div>
                   </td>
                 </tr>
@@ -456,7 +437,7 @@ const CityManagementPage = () => {
           </table>
         </div>
       </div>
- 
+
       <div className="pagination">
         <button className="pagination-button">Previous</button>
         {[1, 2, 3, '...', 8, 9, 10].map((page, index) => (
@@ -469,40 +450,40 @@ const CityManagementPage = () => {
         ))}
         <button className="pagination-button">Next</button>
       </div>
-      
+
       <CityViewModal
         isOpen={isViewModalOpen}
         onClose={handleCloseModal}
         cityData={selectedCity || {}}
         isNewRecord={isNewCity}
       />
- 
+
       <style>{`
         .page-content {
           padding: 24px;
           background-color: #ffffff;
           border-radius: 8px;
           border: 1px solid #e2e8f0;
-          min-height: 400px;
+          overflow: hidden; /* Prevent overall page scrolling */
         }
- 
+
         .page-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
           margin-bottom: 16px;
         }
- 
+
         .page-title {
           font-size: 24px;
           font-weight: 700;
         }
- 
+
         .page-actions {
           display: flex;
           gap: 8px;
         }
- 
+
         .action-button {
           padding: 8px 16px;
           border: 1px solid #e2e8f0;
@@ -513,7 +494,7 @@ const CityManagementPage = () => {
           text-decoration: none;
           color: #444;
         }
- 
+
         .action-button.primary {
           background-color: #007bff;
           color: #fff;
@@ -536,7 +517,6 @@ const CityManagementPage = () => {
           cursor: pointer;
         }
         
-        /* Table wrapper with fixed height */
         .table-container-wrapper {
           position: relative;
           margin-bottom: 16px;
@@ -545,19 +525,16 @@ const CityManagementPage = () => {
           overflow: hidden;
         }
         
-        /* Enhanced table responsive container with both horizontal and vertical scrolling */
         .table-responsive {
           width: 100%;
-          overflow-x: auto;
-          overflow-y: auto;
-          max-height: 490px; /* Fixed height for vertical scrolling */
+          overflow-x: auto; /* Enable horizontal scrolling */
+          overflow-y: auto; /* Enable vertical scrolling */
+          max-height: 400px; /* Fixed height to trigger vertical scrolling */
           -webkit-overflow-scrolling: touch;
-          /* Enhanced scrollbar styles */
           scrollbar-width: thin;
-          scrollbar-color:rgb(233, 235, 237) #f0f0f0;
+          scrollbar-color: rgb(233, 235, 237) #f0f0f0;
         }
         
-        /* Horizontal scrollbar styles */
         .table-responsive::-webkit-scrollbar {
           height: 8px;
           width: 8px;
@@ -576,68 +553,67 @@ const CityManagementPage = () => {
         .table-responsive::-webkit-scrollbar-thumb:hover {
           background-color: #0056b3;
         }
- 
+
         .table-container {
           width: 100%;
           border-collapse: collapse;
-          min-width: 1200px; /* Ensures table doesn't shrink too much */
+          min-width: 1200px; /* Ensure horizontal scrolling */
         }
- 
+
         .table-container th,
         .table-container td {
           padding: 23px;
           text-align: left;
           border-bottom: 1px solid #e2e8f0;
-          white-space: nowrap; /* Prevents text wrapping in cells */
+          white-space: nowrap;
         }
- 
+
         .table-container th {
           background-color: #f8f9fa;
           font-weight: 600;
           position: sticky;
           top: 0;
           z-index: 10;
-          box-shadow: 0 1px 0 #e2e8f0; /* Creates a border effect even when scrolling */
+          box-shadow: 0 1px 0 #e2e8f0;
         }
         
         .table-container tr:hover {
           background-color: #f5f8ff;
         }
- 
+
         .table-actions {
           display: flex;
           gap: 8px;
         }
- 
+
         .table-action {
           cursor: pointer;
           color: #666;
         }
         .icon-text {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px; /* Adjust spacing between icon and text */
-}
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
 
-.icon {
-  display: block;
-  width: 16px; /* Optional: match icon size */
-  height: 16px;
-}
-
+        .icon {
+          display: block;
+          width: 16px;
+          height: 16px;
+        }
         
         .view-action {
-          color:rgb(117, 120, 126);
+          color: rgb(117, 120, 126);
         }
- 
+
         .pagination {
           display: flex;
           justify-content: center;
           gap: 8px;
           margin-top: 16px;
-          flex-wrap: wrap; /* Allow pagination to wrap on smaller screens */
+          flex-wrap: wrap;
         }
- 
+
         .pagination-button {
           padding: 8px 16px;
           border: 1px solid #e2e8f0;
@@ -646,14 +622,13 @@ const CityManagementPage = () => {
           background-color: #fff;
           font-size: 14px;
         }
- 
+
         .pagination-button.active {
-          background-color:rgb(226, 229, 233);
+          background-color: rgb(226, 229, 233);
           color: #fff;
-          border-color:rgb(135, 136, 136);
+          border-color: rgb(135, 136, 136);
         }
         
-        /* Responsive adjustments */
         @media screen and (max-width: 768px) {
           .page-header {
             flex-direction: column;
@@ -674,8 +649,6 @@ const CityManagementPage = () => {
       `}</style>
     </div>
   );
-
-
 };
- 
-export default CityManagementPage; 
+
+export default CityManagementPage;

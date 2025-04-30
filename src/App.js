@@ -73,7 +73,7 @@ function App() {
   );
 }
 
-function Header() {
+export function Header() {
   return (
     <header className="header-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', height: '77px', backgroundColor: 'white' }}>
       
@@ -110,7 +110,7 @@ function Header() {
   );
 }
 
-  function SideMenu() {
+  export function SideMenu() {
     const navigate = useNavigate();
 
     const handleMenuClick = (e) => {

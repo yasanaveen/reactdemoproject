@@ -1,0 +1,123 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000; /* Changed to solid black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content.view-modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 650px;
+    max-width: 95%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    padding: 0;
+    line-height: 1;
+  }
+  
+  .view-form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    top:214px;
+    left:360px;
+    padding: 24px;
+    radius: 12px;
+  }
+  
+  .view-row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .view-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .view-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+  }
+  
+  .view-group input, .view-group select {
+    padding: 8px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+  }
+  
+  .view-group input:not([readonly]), .view-group select:not([disabled]) {
+    border-color: #4951f5;
+    background-color: #f8f9ff;
+  }
+  
+  .view-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 24px;
+  }
+  
+  .delete-button {
+    padding: 8px 24px;
+    border-radius: 4px;
+    background-color: white;
+    color: #ff4d4f;
+    border: 1px solid #ff4d4f;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .edit-button, .save-button {
+    padding: 8px 32px;
+    border-radius: 4px;
+    background-color: #4951f5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .cancel-button {
+    padding: 8px 24px;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    color: #444;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+  }
