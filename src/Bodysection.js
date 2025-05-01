@@ -51,7 +51,7 @@ function Bodysection() {
     <div className="bodycontainer">
       <div className="left-section">
         <h1 className="body-title">Students Masters</h1>
-        <p className="bodydescription">
+        <p className="bodydescription text-gray-600 mt-2 mb-4">
           Access and manage comprehensive student details seamlessly.<br />
           View personalized profiles tailored to your campus.
         </p>
