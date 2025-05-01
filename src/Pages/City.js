@@ -609,22 +609,25 @@ const CityManagementPage = () => {
 
           .view-form-content {
             background-color: #fff;
-            border-radius: 8px;
+            border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            gap:32px;
           }
           
           .form-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 20px;
-            border-bottom: 1px solid #e2e8f0;
+            padding:  10px;
+            border-bottom:
+            width: 432px;
+            height: 30px;
           }
           
           .form-title {
             font-size: 16px;
             font-weight: 600;
-            margin: 0;
+            margin: 5;
           }
           
           .close-button {
@@ -640,14 +643,14 @@ const CityManagementPage = () => {
           .view-form {
             display: flex;
             flex-direction: column;
-            padding: 22px;
+            padding: 30px;
           }
           
           /* Grid layout for the form fields */
           .view-form-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 20px;
             margin-bottom: 20px;
           }
           
@@ -668,7 +671,7 @@ const CityManagementPage = () => {
             border: 1px solid #e0e0e0;
             border-radius: 4px;
             font-size: 14px;
-            width: 100%;
+            width: 80%;
           }
           
           .form-group input::placeholder {
@@ -681,12 +684,12 @@ const CityManagementPage = () => {
             justify-content: flex-end;
             margin-top: 8px;
             padding-top: 16px;
-            border-top: 1px solid #e2e8f0;
+            
           }
           
           .delete-button {
-            padding: 8px 20px;
-            border-radius: 4px;
+            display: flex;
+            border-radius: 10px;
             background-color: white;
             color: #ff4d4f;
             border: 1px solid #ff4d4f;
@@ -696,11 +699,13 @@ const CityManagementPage = () => {
           }
           
           .edit-button {
-            padding: 8px 24px;
-            border-radius: 4px;
+            padding: 8px 120px;
+            border-radius: 8px;
             background-color: #4951f5;
             color: white;
             border: none;
+            width: 318px;
+            height:44px;
             cursor: pointer;
             font-weight: 500;
             font-size: 14px;
