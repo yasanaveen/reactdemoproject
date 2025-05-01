@@ -496,7 +496,7 @@ const CityManagementPage = () => {
           .icon-text {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 1px;
           }
 
           .icon {

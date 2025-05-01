@@ -493,6 +493,14 @@ img{
   }
   
 }
+.menu-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px;
+  background-color: #f8f9fa;
+  
+}
    
 
 

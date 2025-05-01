@@ -127,9 +127,6 @@ export function Header() {
     };
 
     const menuItems = [
-
-    
-      
       { label: "Students", key: "students", icon: <PiStudentBold /> },
       { label: "Application", key: "application", icon: <FaNewspaper /> },
       { label: "Employee", key: "employee", icon: <RiEmpathizeFill /> },
@@ -142,13 +139,12 @@ export function Header() {
       { label: "CCTV", key: "cctv", icon: <LuCctv /> },
       { label: "HRMS", key: "hrms", icon: <IoIosMan /> }
     ];
-
+    
     return (
-      
-      <div style={{ display: "flex", flexDirection: "row", padding: "25px" }}>
-        <div className="modules-header p-4 text-center font-medium text-indigo-700 bg-indigo-50">
-        
-      </div>
+      <div style={{ display: "flex", flexDirection: "column", padding: "25px" }}>
+        <div className="menu-header" style={{ fontSize: "20px", fontWeight: "bold", marginBottom: "10px", color: "#333" }}>
+          Modules
+        </div>
         <Menu mode="vertical" items={menuItems} onClick={handleMenuClick} />
       </div>
     );
