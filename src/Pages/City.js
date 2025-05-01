@@ -252,7 +252,7 @@ const CityManagementPage = () => {
             <table className="table-container table-header-table">
               <thead>
                 <tr>
-                  <th style={{ width: '40px' }}>
+                  <th style={{ width: '30px' }}>
                     <input
                       type="checkbox"
                       checked={selectAll}
