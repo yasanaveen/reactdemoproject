@@ -7,13 +7,17 @@
 .main-container{
   display: flex;
   flex: 1;
-  
+  height: 823px;
 
 }
 
 .body-container{
   display: flex;
   flex: 1;
+  height: 823px;
+}
+.body-title{
+  height:5px
 }
 
 header {
@@ -76,10 +80,7 @@ img{
 }
  
 .search-input {
-  width: 100%;
-  padding: 8px 8px 8px 35px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
+  
  margin-left: 90px;
  margin-top: 10px;
  
@@ -270,10 +271,6 @@ img{
 /* Pagination Styles */
 .pagination {
   display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 16px;
-  flex-wrap: wrap; /* Allow pagination to wrap on smaller screens */
 }
 
 .pagination-button {

@@ -248,8 +248,7 @@ const CityManagementPage = () => {
         )}
 
         <div className="table-container-wrapper">
-          <div className="table-header">
-            <table className="table-container table-header-table">
+        <table className="table-container">
               <thead>
                 <tr>
                   <th style={{ width: '30px' }}>
@@ -269,14 +268,9 @@ const CityManagementPage = () => {
                   <th>Status</th>
                   <th>Sync Status</th>
                   <th>Sync Date</th>
-                  <th>Actions</th>
+                  <th></th>
                 </tr>
               </thead>
-            </table>
-          </div>
-          
-          <div className="table-body">
-            <table className="table-container">
               <tbody>
                 {cities.map((row, index) => (
                   <tr key={index}>
@@ -316,7 +310,6 @@ const CityManagementPage = () => {
                 ))}
               </tbody>
             </table>
-          </div>
         </div>
 
         <div className="pagination">
@@ -426,42 +419,19 @@ const CityManagementPage = () => {
           
           /* Table container styles */
           .table-container-wrapper {
-            display: flex;
-            flex-direction: column;
             border: 1px solid #e2e8f0;
             border-radius: 10px;
-            overflow: hidden;
             margin-bottom: 16px;
-            flex-grow: 1;
-            min-height: 0;
-          }
-          
-          .table-header {
-            flex-shrink: 0;
-            background-color: #f8f9fa;
-            width: 100%;
-            box-shadow: 0 1px 0 #e2e8f0;
-          }
-          
-          .table-header-table {
-            width: 100%;
-            min-width: 1200px;
-            table-layout: fixed;
-          }
-          
-          .table-body {
-            flex-grow: 1;
+            width:1160px;
+            height: 630px;
             overflow-y: auto;
             overflow-x: auto;
-            width: 100%;
-            min-height: 0;
-            max-height: calc(100vh - 300px);
           }
           
+          
           .table-container {
-            width: 100%;
+            width: 1700px;
             border-collapse: collapse;
-            min-width: 1200px;
             table-layout: fixed;
           }
 
@@ -530,31 +500,6 @@ const CityManagementPage = () => {
           }
 
           /* Pagination styles */
-          .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 16px;
-            flex-shrink: 0;
-          }
-
-          .pagination-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 36px;
-            min-width: 36px;
-            padding: 0 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 4px;
-            background-color: #fff;
-            color: #444;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-          }
-
           .pagination-button.active {
             background-color: #1a73e8;
             color: white;
@@ -572,6 +517,13 @@ const CityManagementPage = () => {
             align-items: center;
             gap: 8px;
           }
+
+          .pagination-button.prev{
+          margin-right: 350px;
+          }
+
+           .pagination-button.next{
+           margin-left: 350px;}
 
           .pagination-arrow {
             width: 16px;

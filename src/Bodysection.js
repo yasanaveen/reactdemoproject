@@ -13,7 +13,8 @@ import { MdSchool } from "react-icons/md";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
+import serachicon from '../src/assets/searchicon.png';
+import './bodycss.css';
 
 
 
@@ -56,8 +57,14 @@ function Bodysection() {
           View personalized profiles tailored to your campus.
         </p>
         <div className="search-wrapper">
-           <FontAwesomeIcon icon={faSearch} className="search-icon" style={{ position: 'absolute', top: '30%', left: '250px', transform: 'translateY(-50%)', color: '#aaa' }} /> 
-          <input type="text" className="bodyinput" placeholder="Search for the module" style={{ paddingLeft: '40px' }}/>
+          <div className="above">
+         <img src={ serachicon } alt='searchicon' className="icon"/>
+         </div>
+         <div className="binph">
+         <input type="text"  className="inph" placeholder='Search for the module '/>
+
+          {/* <input type="text" className="bodyinput" placeholder="Search for the module" style={{ paddingLeft: '40px' }}/> */}
+        </div>
         </div>
       </div>
 

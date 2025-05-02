@@ -1,0 +1,45 @@
+.search-wrapper{
+    width: 321px;
+    height: 29px;
+    border-radius: 31px;
+    border-width: 1px;
+    padding-top: 11px;
+    padding-right: 136px;
+    padding-bottom: 11px;
+    padding-left: 13px;
+    gap: 10px;
+    background: #FFFFFF;
+    border: 1px solid #DCDCDC
+}
+.icon{
+width: 17px;
+height: 17px;
+
+}
+.above{
+    display: flex;
+    justify-content: flex-start;
+   margin-left: -20px;
+   margin-top: -4px;
+    
+}
+.inph{
+    width: 145px;
+height: 17px;
+font-family: Inter;
+font-weight: 400px;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: -0.6%;
+border: none;
+
+
+
+}
+.binph{
+    display: flex;
+    direction: row;
+    margin-top:-30px;
+    margin-left: 30px;
+    border-radius: 700px;
+}
