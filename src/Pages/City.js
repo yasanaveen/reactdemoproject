@@ -422,7 +422,7 @@ const CityManagementPage = () => {
             border: 1px solid #e2e8f0;
             border-radius: 10px;
             margin-bottom: 16px;
-            width:1160px;
+            width:1350px;
             height: 630px;
             overflow-y: auto;
             overflow-x: auto;
