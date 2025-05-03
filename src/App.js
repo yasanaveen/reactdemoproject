@@ -2,6 +2,8 @@
 import './App.css';
 import { Menu } from 'antd';
 import image from "../src/assets/image.png";
+import srichaitanyalogo from './assets/srichaitanyalogo.png';
+import profileImage from './assets/image.png';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import City from './Pages/City';
@@ -79,7 +81,7 @@ export function Header() {
       
       {/* Logo */}
       <div>
-        <img src={image} alt="Logo" style={{ height: '50px' }} />
+        <img src={srichaitanyalogo} alt="Logo" style={{ height: '50px' }} />
       </div>
 
       {/* Search Bar */}
@@ -94,18 +96,49 @@ export function Header() {
       </div>
 
       {/* Bell Icon */}
-      <div className="icons-container" style={{ display: 'flex', alignItems: 'center', gap: '0px',marginRight:'10px' }}>
-        <FontAwesomeIcon icon={faBell} style={{ fontSize: '20px', cursor: 'pointer', color: '#555' }} />
-        
-        {/* Profile Section */}
-        {/* <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}> */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start',padding:'60px' }}>
-        <div style={{ fontWeight: 'normal', color: 'black' }}>HYD 256789</div>
+      <div
+  className="icons-container"
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    marginRight: '10px'
+  }}
+>
+  <FontAwesomeIcon
+    icon={faBell}
+    style={{
+      fontSize: '20px',
+      cursor: 'pointer',
+      color: '#555'
+    }}
+  />
 
-          <div style={{ fontSize: '12px', color: '#333' }}>Cashier</div>
-          {/* <img src="https://via.placeholder.com/40" alt="Profile" style={{ borderRadius: '50%', width: '40px', height: '40px' }} /> */}
-        </div>
-      </div>
+  {/* Profile Image */}
+  <img
+    src={profileImage}
+    alt="Profile"
+    style={{
+      borderRadius: '50%',
+      width: '40px',
+      height: '40px'
+    }}
+  />
+
+  {/* User Info */}
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start'
+    }}
+  >
+    <div style={{ fontWeight: 'normal', color: 'black' }}>HYD 256789</div>
+    <div style={{ fontSize: '12px', color: '#333' }}>Cashier</div>
+  </div>
+</div>
+
+      
     </header>
   );
 }
