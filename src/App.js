@@ -102,7 +102,7 @@ export function Header() {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
-    marginRight: '10px'
+    marginRight: '80px'
   }}
 >
   <FontAwesomeIcon

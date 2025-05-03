@@ -229,7 +229,10 @@ const CityManagementPage = () => {
         <div className="page-header">
           <h2 className="page-title">City</h2>
           <div className="page-actions">
-            <button className="action-button">Filter</button>
+            <div className="filter-button-container">
+              <button className="action-button">Filter</button>
+              <span className="notification-badge">1</span>
+            </div>
             <button className="action-button">Export</button>
             <button
               className="action-button primary"
@@ -381,6 +384,28 @@ const CityManagementPage = () => {
           .page-actions {
             display: flex;
             gap: 8px;
+          }
+
+          /* New styles for filter button with notification */
+          .filter-button-container {
+            position: relative;
+            display: inline-block;
+          }
+
+          .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ff4d4f;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
           }
 
           .action-button {
