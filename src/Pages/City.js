@@ -330,7 +330,6 @@ const CityManagementPage = () => {
           <button className="pagination-button">8</button>
           <button className="pagination-button">9</button>
           <button className="pagination-button">10</button>
-          
           <button className="pagination-button next">
             Next
             <svg className="pagination-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -356,7 +355,7 @@ const CityManagementPage = () => {
             flex-direction: column;
             overflow: hidden;
           }
-
+          
           .page-content {
             padding: 24px;
             background-color: #ffffff;
