@@ -20,6 +20,7 @@
   height:5px
 }
 
+
 header {
   position: fixed;
   display:flex;
@@ -32,6 +33,7 @@ header {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   height:55px;
 }
+
  
 nav {
   position: fixed;
@@ -43,11 +45,10 @@ nav {
   background-color: #ffffff;
   padding: 0.5rem 1rem;
   z-index: 999;
- 
 }
 .subtitle {
   font-size: 16px;
- 
+
   color: #555;
   margin-top: 5px; /* Adds space above */
   letter-spacing: 1px; /* Adjusts spacing between letters */
