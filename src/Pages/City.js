@@ -35,7 +35,7 @@ const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
         <div className="view-form-container">
           <div className="view-form-content">
             <div className="form-header">
-              <h2 className="form-title">View</h2>
+              <h2 className="form-title">Add New Field</h2>
               <button className="close-button" onClick={onClose}>×</button>
             </div>
 
@@ -63,7 +63,7 @@ const CityViewForm = ({ isOpen, onClose, cityData, isNewRecord = false }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>City Name</label>
+                  <label>City Name</label> 
                   <input
                     type="text"
                     name="city"

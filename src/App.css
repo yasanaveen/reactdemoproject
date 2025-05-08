@@ -473,7 +473,7 @@ img{
   .page-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 1.6%;
   }
   
   .page-actions {
@@ -483,7 +483,7 @@ img{
   }
   
   .pagination {
-    padding: 8px 0;
+    padding: 1% ;
   }
   
   .view-row {
@@ -499,7 +499,34 @@ img{
   background-color: #f8f9fa;
   
 }
+
+
+/* 📱 Mobile and Tablet Responsive */
+@media (max-width: 1000px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 10px;
+  }
+
+  .search-container {
+    margin: 10px 0;
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .icons-container {
+    margin-right: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
    
+
 
 
 
