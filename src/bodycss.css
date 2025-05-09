@@ -43,3 +43,88 @@ border: none;
     margin-left: 30px;
     border-radius: 700px;
 }
+
+
+
+
+
+
+/* Tablets (landscape) */
+@media screen and (max-width: 1024px) {
+    .bodycontainer {
+      padding: 1.5rem;
+    }
+    
+    .pill-button {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+    
+    .body-title {
+      font-size: 1.8rem;
+    }
+  }
+
+
+  /* Tablets (portrait) */
+@media screen and (max-width: 768px) {
+    .bodycontainer {
+      flex-direction: column;
+      padding: 1.25rem;
+    }
+    
+    .left-section {
+      padding-right: 0;
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
+    
+    .right-section {
+      width: 100%;
+      max-width: 100%;
+      justify-content: center;
+    }
+  }
+
+
+  /* Mobile Phones  rem always follows root  */
+@media screen and (max-width: 576px) {
+    .bodycontainer {
+      padding: 1rem;
+      margin: 0.5rem;
+    }
+    
+    .body-title {
+      font-size: 1.5rem;
+    }
+    
+    .bodydescription br {
+      display: none;
+    }
+    
+    .mobile-menu-button {
+      display: flex;
+      margin-top: 1rem;
+    }
+    
+    .right-section {
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .right-section.active {
+      display: flex;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    .pill-button {
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .search-wrapper {
+      max-width: 100%;
+    }
+  }
+  
